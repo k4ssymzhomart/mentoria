@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ArrowLeft, Check } from 'lucide-react';
 import { db } from '@/lib/data/provider';
-import { getAuthUserId } from '@/lib/auth';
+import { getAuthUserId, getSessionUser } from '@/lib/auth';
 import { tl } from '@/lib/data/types';
 import type { Tag } from '@/lib/data/types';
 import { Link } from '@/i18n/navigation';
@@ -13,6 +13,7 @@ import { ProgressBar } from '@/components/courses/progress-bar';
 import { EnrollButton } from '@/components/courses/enroll-button';
 import { LessonList } from '@/components/courses/lesson-list';
 import { LockedOutline } from '@/components/courses/locked-outline';
+import { AssistantEntryButton } from '@/components/assistant/assistant-entry';
 
 export async function generateMetadata({
   params,
@@ -36,7 +37,8 @@ export default async function CourseDetailPage({
   if (!course) notFound();
 
   const t = await getTranslations('courses');
-  const [tags, userId] = await Promise.all([db.getTags(), getAuthUserId()]);
+  const ta = await getTranslations('assistant');
+  const [tags, userId, session] = await Promise.all([db.getTags(), getAuthUserId(), getSessionUser()]);
   const tagMap = new Map(tags.map((tag: Tag) => [tag.slug, tag]));
   const lessons = course.lessons;
   const firstLessonId = lessons[0]?.id ?? null;
@@ -96,6 +98,14 @@ export default async function CourseDetailPage({
             ))}
           </div>
         ) : null}
+        <div>
+          <AssistantEntryButton
+            label={ta('ask')}
+            prompt={`${ta('ask')}: ${tl(course.title, locale)}`}
+            context={{ kind: 'ask', itemType: 'course', itemId: course.id }}
+            canAsk={Boolean(session)}
+          />
+        </div>
       </header>
 
       {/* Enrollment / progress panel */}
@@ -121,7 +131,7 @@ export default async function CourseDetailPage({
               {t('detail.completed')}
             </p>
             {certificateSerial ? (
-              <Button render={<Link href={`/certificates/${certificateSerial}`} />}>
+              <Button nativeButton={false} render={<Link href={`/certificates/${certificateSerial}`} />}>
                 {t('detail.viewCertificate')}
               </Button>
             ) : null}
@@ -137,7 +147,7 @@ export default async function CourseDetailPage({
                 })}
               </span>
               {resumeId ? (
-                <Button render={<Link href={`/courses/${slug}/lessons/${resumeId}`} />}>
+                <Button nativeButton={false} render={<Link href={`/courses/${slug}/lessons/${resumeId}`} />}>
                   {t('detail.continue')}
                 </Button>
               ) : null}

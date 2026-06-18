@@ -98,6 +98,7 @@ export async function CourseCard({
           <div className="relative z-10">
             {enrollment ? (
               <Button
+                nativeButton={false}
                 variant="outline"
                 size="sm"
                 className="w-full"

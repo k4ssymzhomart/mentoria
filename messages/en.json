@@ -398,5 +398,64 @@
         "volunteer": "Volunteer / social impact"
       }
     }
+  },
+  "assistant": {
+    "title": "Mentoria Assistant",
+    "caption": "Grounded in the Mentoria catalog",
+    "placeholder": "Ask about courses or opportunities…",
+    "send": "Send",
+    "stop": "Stop",
+    "reset": "New chat",
+    "open": "Assistant",
+    "you": "You",
+    "assistant": "Assistant",
+    "empty": "Ask a question or pick a prompt to start.",
+    "unavailable": "The assistant is temporarily unavailable — here's what I'd suggest.",
+    "signIn": "Sign in to chat with the assistant.",
+    "signInTitle": "Sign in to use the assistant",
+    "signInBody": "Ask Mentoria about courses, opportunities, and your plan once you sign in.",
+    "error": "Something went wrong. Try again.",
+    "thinking": "Thinking…",
+    "streaming": "Assistant is writing…",
+    "explain": "Explain",
+    "ask": "Ask about this",
+    "kind": {
+      "opportunity": "Opportunity",
+      "course": "Course"
+    },
+    "prompts": {
+      "olympiads": "Which olympiads fit me?",
+      "plan": "Plan my next year",
+      "ielts": "How should I prep for IELTS?",
+      "scholarships": "Find scholarships for STEM"
+    },
+    "card": {
+      "title": "Ask Mentoria",
+      "subtitle": "Get guidance grounded in the real catalog."
+    },
+    "refs": {
+      "save": "Save",
+      "saved": "Saved",
+      "add": "Add to roadmap",
+      "added": "Added",
+      "view": "View"
+    },
+    "draft": {
+      "button": "Draft my roadmap with AI",
+      "drafting": "Drafting…",
+      "title": "Proposed plan",
+      "accept": "Add to roadmap",
+      "cancel": "Cancel",
+      "remove": "Remove"
+    },
+    "fallback": {
+      "recommend": "Based on your interests, these look like a strong fit:",
+      "explain": "This fits your interests in {tags}.",
+      "explainGeneric": "This is a solid option to explore next.",
+      "roadmap": "Here's a starter plan across your remaining grades — review and add it.",
+      "nothing": "I couldn't find a close match — try adding a couple more interests in your profile.",
+      "generic": "Here are some relevant options to explore:",
+      "confirm": "Remember to confirm deadlines and links on the official source."
+    }
   }
 }

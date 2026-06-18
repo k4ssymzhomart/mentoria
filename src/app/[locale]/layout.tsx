@@ -6,6 +6,7 @@ import { routing } from '@/i18n/routing';
 import { Header } from '@/components/shell/header';
 import { Footer } from '@/components/shell/footer';
 import { PageTransition } from '@/components/motion/page-transition';
+import { AssistantProvider } from '@/components/assistant/assistant-provider';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -36,12 +37,14 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <div className="flex min-h-svh flex-col">
-      <Header />
-      <main className="flex-1">
-        <PageTransition>{children}</PageTransition>
-      </main>
-      <Footer />
-    </div>
+    <AssistantProvider>
+      <div className="flex min-h-svh flex-col">
+        <Header />
+        <main className="flex-1">
+          <PageTransition>{children}</PageTransition>
+        </main>
+        <Footer />
+      </div>
+    </AssistantProvider>
   );
 }

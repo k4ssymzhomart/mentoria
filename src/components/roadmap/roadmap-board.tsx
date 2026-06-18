@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useTransition } from 'react';
-import { Plus, Sparkles } from 'lucide-react';
+import { useState } from 'react';
+import { Plus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -11,10 +11,10 @@ import type { RoadmapItem } from '@/lib/data/types';
 import {
   upsertRoadmapItemAction,
   deleteRoadmapItemAction,
-  generateStarterRoadmapAction,
 } from '@/lib/personalization/actions';
 import { RoadmapCard, STATUS_NEXT } from './roadmap-card';
 import { AddItemDialog, type CatalogOption } from './add-item-dialog';
+import { RoadmapDraftButton } from './roadmap-draft-button';
 
 const GRADES = [9, 10, 11, 12];
 
@@ -31,7 +31,6 @@ export function RoadmapBoard({
   const router = useRouter();
   const [items, setItems] = useState<RoadmapItem[]>(initialItems);
   const [addOpen, setAddOpen] = useState(false);
-  const [generating, startGenerate] = useTransition();
 
   const persist = (item: RoadmapItem) =>
     upsertRoadmapItemAction(item).then((r) => { if (!r.ok) toast.error(t('error')); });
@@ -83,18 +82,6 @@ export function RoadmapBoard({
     persist(item);
   }
 
-  function generate() {
-    startGenerate(async () => {
-      const res = await generateStarterRoadmapAction();
-      if (res.ok) {
-        toast.success(t('generated'));
-        router.refresh();
-      } else {
-        toast.error(t('error'));
-      }
-    });
-  }
-
   const empty = items.length === 0;
 
   return (
@@ -106,10 +93,7 @@ export function RoadmapBoard({
         </div>
         {!empty ? (
           <div className="flex gap-2">
-            <Button variant="outline" onClick={generate} disabled={generating}>
-              <Sparkles className="size-4" />
-              <span className="hidden sm:inline">{t('generate')}</span>
-            </Button>
+            <RoadmapDraftButton onAccepted={() => router.refresh()} />
             <Button onClick={() => setAddOpen(true)}>
               <Plus className="size-4" />
               <span className="hidden sm:inline">{t('add')}</span>
@@ -125,10 +109,7 @@ export function RoadmapBoard({
             <p className="max-w-sm text-sm text-muted-foreground">{t('empty.subtitle')}</p>
           </div>
           <div className="flex flex-wrap justify-center gap-2">
-            <Button onClick={generate} disabled={generating}>
-              <Sparkles className="size-4" />
-              {t('generate')}
-            </Button>
+            <RoadmapDraftButton onAccepted={() => router.refresh()} />
             <Button variant="outline" onClick={() => setAddOpen(true)}>
               <Plus className="size-4" />
               {t('addManually')}

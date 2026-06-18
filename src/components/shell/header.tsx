@@ -6,6 +6,7 @@ import { MainNav } from './main-nav';
 import { MobileNav } from './mobile-nav';
 import { UserMenu } from './user-menu';
 import { SignInDialog } from './sign-in-dialog';
+import { AssistantHeaderButton } from '@/components/assistant/assistant-entry';
 
 export async function Header() {
   const profile = await getProfile();
@@ -31,12 +32,15 @@ export async function Header() {
           <LocaleSwitcher />
           <ThemeToggle />
           {profile ? (
-            <UserMenu
-              name={profile.full_name}
-              email={profile.email}
-              avatarUrl={profile.avatar_url}
-              role={profile.role}
-            />
+            <>
+              <AssistantHeaderButton />
+              <UserMenu
+                name={profile.full_name}
+                email={profile.email}
+                avatarUrl={profile.avatar_url}
+                role={profile.role}
+              />
+            </>
           ) : (
             <SignInDialog />
           )}

@@ -6,7 +6,7 @@ export function EmptyNudge({ text, cta }: { text: string; cta: { href: string; l
   return (
     <div className="flex flex-col items-start gap-3 rounded-lg border border-dashed p-6">
       <p className="text-sm text-muted-foreground">{text}</p>
-      <Button variant="outline" render={<Link href={cta.href} />}>
+      <Button nativeButton={false} variant="outline" render={<Link href={cta.href} />}>
         {cta.label}
       </Button>
     </div>

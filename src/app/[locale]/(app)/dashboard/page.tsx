@@ -17,6 +17,8 @@ import { Why } from '@/components/dashboard/why';
 import { DeadlineList } from '@/components/dashboard/deadline-list';
 import { CertificateWall } from '@/components/dashboard/certificate-wall';
 import { EmptyNudge } from '@/components/dashboard/empty-nudge';
+import { AssistantEntryButton } from '@/components/assistant/assistant-entry';
+import { AssistantPromptCard } from '@/components/assistant/prompt-card';
 
 export default async function DashboardPage({
   params,
@@ -28,6 +30,7 @@ export default async function DashboardPage({
   const profile = await requireOnboarding();
 
   const t = await getTranslations('dashboard');
+  const ta = await getTranslations('assistant');
   const activeLocale = await getLocale();
   const userId = await getAuthUserId();
 
@@ -119,6 +122,12 @@ export default async function DashboardPage({
                 <div key={opp.id}>
                   <OpportunityCard opp={opp} tagMap={tagMap} saved={savedSet.has(opp.id)} canSave={Boolean(userId)} />
                   <Why labels={overlapLabels(opp.tags, vector, tagMap, activeLocale)} />
+                  <AssistantEntryButton
+                    variant="text"
+                    label={ta('explain')}
+                    prompt={`${ta('explain')}: ${tl(opp.title, activeLocale)}`}
+                    context={{ kind: 'explain', itemType: 'opportunity', itemId: opp.id }}
+                  />
                 </div>
               ))}
             </div>
@@ -132,6 +141,12 @@ export default async function DashboardPage({
                 <div key={course.id}>
                   {courseCard(course)}
                   <Why labels={overlapLabels(course.tags, vector, tagMap, activeLocale)} />
+                  <AssistantEntryButton
+                    variant="text"
+                    label={ta('explain')}
+                    prompt={`${ta('explain')}: ${tl(course.title, activeLocale)}`}
+                    context={{ kind: 'explain', itemType: 'course', itemId: course.id }}
+                  />
                 </div>
               ))}
             </div>
@@ -143,11 +158,11 @@ export default async function DashboardPage({
 
   const quickLinks = (
     <div className="grid gap-3 sm:grid-cols-2">
-      <Button variant="outline" className="h-auto justify-start gap-3 p-4" render={<Link href="/calendar" />}>
+      <Button nativeButton={false} variant="outline" className="h-auto justify-start gap-3 p-4" render={<Link href="/calendar" />}>
         <CalendarDays className="size-5" />
         {t('quickLinks.calendar')}
       </Button>
-      <Button variant="outline" className="h-auto justify-start gap-3 p-4" render={<Link href="/roadmap" />}>
+      <Button nativeButton={false} variant="outline" className="h-auto justify-start gap-3 p-4" render={<Link href="/roadmap" />}>
         <MapIcon className="size-5" />
         {t('quickLinks.roadmap')}
       </Button>
@@ -170,12 +185,14 @@ export default async function DashboardPage({
         ]}
       />
 
+      <AssistantPromptCard />
+
       {firstRun ? (
         <>
           {recommendedSection}
           <div className="flex flex-wrap gap-3">
-            <Button render={<Link href="/opportunities" />}>{t('recommended.browseOpps')}</Button>
-            <Button variant="outline" render={<Link href="/courses" />}>{t('recommended.startCourse')}</Button>
+            <Button nativeButton={false} render={<Link href="/opportunities" />}>{t('recommended.browseOpps')}</Button>
+            <Button nativeButton={false} variant="outline" render={<Link href="/courses" />}>{t('recommended.startCourse')}</Button>
           </div>
           {quickLinks}
         </>

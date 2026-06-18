@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ArrowLeft } from 'lucide-react';
 import { db } from '@/lib/data/provider';
-import { getAuthUserId } from '@/lib/auth';
+import { getAuthUserId, getSessionUser } from '@/lib/auth';
 import { tl } from '@/lib/data/types';
 import type { Tag } from '@/lib/data/types';
 import { Link } from '@/i18n/navigation';
@@ -11,6 +11,7 @@ import { SaveButton } from '@/components/opportunities/save-button';
 import { ApplyButton } from '@/components/opportunities/apply-button';
 import { RelatedOpportunities } from '@/components/opportunities/related-opportunities';
 import { formatDeadlineLabel, formatGradeRange } from '@/lib/opportunities/format';
+import { AssistantEntryButton } from '@/components/assistant/assistant-entry';
 
 export async function generateMetadata({
   params,
@@ -34,7 +35,8 @@ export default async function OpportunityDetailPage({
   if (!opp) notFound();
 
   const t = await getTranslations('opportunities');
-  const [tags, userId] = await Promise.all([db.getTags(), getAuthUserId()]);
+  const ta = await getTranslations('assistant');
+  const [tags, userId, session] = await Promise.all([db.getTags(), getAuthUserId(), getSessionUser()]);
   const saved = userId ? await db.listSaved(userId) : [];
 
   const tagMap = new Map(tags.map((tag) => [tag.slug, tag]));
@@ -87,6 +89,21 @@ export default async function OpportunityDetailPage({
         <div className="hidden items-center gap-3 sm:flex">
           <ApplyButton opportunityId={opp.id} applyUrl={opp.apply_url} canTrack={canSave} />
           <SaveButton opportunityId={opp.id} initialSaved={isSaved} canSave={canSave} variant="full" />
+          <AssistantEntryButton
+            label={ta('ask')}
+            prompt={`${ta('ask')}: ${tl(opp.title, locale)}`}
+            context={{ kind: 'ask', itemType: 'opportunity', itemId: opp.id }}
+            canAsk={Boolean(session)}
+          />
+        </div>
+
+        <div className="sm:hidden">
+          <AssistantEntryButton
+            label={ta('ask')}
+            prompt={`${ta('ask')}: ${tl(opp.title, locale)}`}
+            context={{ kind: 'ask', itemType: 'opportunity', itemId: opp.id }}
+            canAsk={Boolean(session)}
+          />
         </div>
 
         {opp.description ? (

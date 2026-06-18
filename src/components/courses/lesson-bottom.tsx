@@ -85,7 +85,7 @@ export function LessonBottom({
 
       <div className="sticky bottom-0 z-20 -mx-4 flex items-center justify-between gap-3 border-t bg-background/95 px-4 py-3 backdrop-blur sm:static sm:mx-0 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0 sm:backdrop-blur-none">
         {prevHref ? (
-          <Button variant="outline" render={<Link href={prevHref} />}>
+          <Button nativeButton={false} variant="outline" render={<Link href={prevHref} />}>
             <ChevronLeft className="size-4" />
             {t('previous')}
           </Button>

@@ -33,7 +33,7 @@ export function CompletionCelebration({
           </div>
           <div className="flex w-full flex-col gap-2 pt-2">
             {serial ? (
-              <Button render={<Link href={`/certificates/${serial}`} />} className="w-full">
+              <Button nativeButton={false} render={<Link href={`/certificates/${serial}`} />} className="w-full">
                 {t('celebration.view')}
               </Button>
             ) : null}
