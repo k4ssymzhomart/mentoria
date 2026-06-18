@@ -30,7 +30,22 @@ function GoogleGlyph() {
   );
 }
 
-export function SignInDialog({ next = '/dashboard' }: { next?: string }) {
+export function SignInDialog({
+  next = '/dashboard',
+  open,
+  onOpenChange,
+  showTrigger = true,
+  title,
+  description,
+}: {
+  next?: string;
+  /** Controlled open state (omit for the default trigger-driven dialog). */
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  showTrigger?: boolean;
+  title?: string;
+  description?: string;
+}) {
   const t = useTranslations('auth');
   const tc = useTranslations('common');
   const [email, setEmail] = useState('');
@@ -70,12 +85,14 @@ export function SignInDialog({ next = '/dashboard' }: { next?: string }) {
   }
 
   return (
-    <Dialog>
-      <DialogTrigger render={<Button>{tc('signIn')}</Button>} />
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      {showTrigger ? (
+        <DialogTrigger render={<Button>{tc('signIn')}</Button>} />
+      ) : null}
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>{t('signInTitle')}</DialogTitle>
-          <DialogDescription>{t('signInSubtitle')}</DialogDescription>
+          <DialogTitle>{title ?? t('signInTitle')}</DialogTitle>
+          <DialogDescription>{description ?? t('signInSubtitle')}</DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4">

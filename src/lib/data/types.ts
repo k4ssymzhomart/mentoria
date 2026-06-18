@@ -171,6 +171,7 @@ export interface OpportunityFilters {
  */
 export const tl = (
   val: Localized | null | undefined,
-  locale: Locale,
+  locale: string,
   fallback: Locale = 'en',
-): string => (val ? val[locale] || val[fallback] || '' : '');
+): string =>
+  val ? (val as Record<string, string>)[locale] || val[fallback] || '' : '';

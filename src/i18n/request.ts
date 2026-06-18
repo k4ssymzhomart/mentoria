@@ -10,6 +10,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   return {
     locale,
+    // Explicit zone → deterministic date formatting (server is UTC on Vercel).
+    timeZone: 'Asia/Almaty',
     messages: (await import(`../../messages/${locale}.json`)).default,
   };
 });

@@ -74,7 +74,68 @@
   },
   "opportunities": {
     "title": "Мүмкіндіктер",
-    "subtitle": "Бүкіл әлемдегі стипендиялар, олимпиадалар және бағдарламалар."
+    "subtitle": "Уақытыңызға тұрарлық әрбір байқау, стипендия және бағдарлама — бір жерде.",
+    "searchPlaceholder": "Мүмкіндіктерді іздеу…",
+    "filtersButton": "Сүзгілер",
+    "sort": { "label": "Сұрыптау", "deadline": "Мерзімі бойынша (жақын)", "newest": "Алдымен жаңалары" },
+    "filters": {
+      "title": "Сүзгілер",
+      "clearAll": "Бәрін тазалау",
+      "active": "{count} белсенді",
+      "type": "Түрі",
+      "format": "Формат",
+      "direction": "Бағыт",
+      "subject": "Пән",
+      "grade": "Сынып",
+      "myGrade": "Менің сыныбым",
+      "anyGrade": "Кез келген",
+      "deadline": "Мерзімі",
+      "deadlineAny": "Маңызды емес",
+      "deadline30": "Жақын 30 күн",
+      "deadline90": "Жақын 90 күн"
+    },
+    "types": {
+      "olympiad": "Олимпиада", "hackathon": "Хакатон", "scholarship": "Стипендия",
+      "internship": "Тәжірибе", "summer_school": "Жазғы мектеп", "research": "Зерттеу",
+      "volunteering": "Волонтёрлік", "competition": "Байқау", "conference": "Конференция"
+    },
+    "formats": { "online": "Онлайн", "offline": "Қатыспен", "hybrid": "Аралас" },
+    "card": { "save": "Сақтау", "saved": "Сақталды", "removeFilter": "Сүзгіні алып тастау" },
+    "save": {
+      "saved": "Сақталды",
+      "removed": "Жойылды",
+      "error": "Бірдеңе дұрыс болмады. Қайталап көріңіз.",
+      "signInTitle": "Сақтау үшін кіріңіз",
+      "signInBody": "Кіргеннен кейін мүмкіндіктерді сақтап, өтінімдеріңізді қадағалаңыз."
+    },
+    "apply": { "apply": "Өтінім беру", "applied": "Өтінім берілді", "appliedToast": "«Берілді» деп белгіленді" },
+    "empty": {
+      "title": "Бұл сүзгілерге сәйкес ешнәрсе табылмады",
+      "hint": "Сүзгіні алып тастаңыз немесе іздеуді кеңейтіңіз.",
+      "clear": "Сүзгілерді тазалау"
+    },
+    "error": { "title": "Мүмкіндіктерді жүктеу мүмкін болмады", "retry": "Қайталау" },
+    "results": { "range": "{total} ішінен {from}–{to}", "total": "{total} нәтиже" },
+    "pagination": { "prev": "Артқа", "next": "Алға" },
+    "detail": {
+      "back": "Мүмкіндіктер",
+      "grades": "{min}–{max} сынып",
+      "gradesUp": "{max} сыныпқа дейін",
+      "gradesFrom": "{min} сыныптан",
+      "anyGrade": "Барлық сыныптар",
+      "organizer": "Ұйымдастырушы",
+      "location": "Орны",
+      "description": "Сипаттама",
+      "requirements": "Талаптар",
+      "related": "Ұқсас мүмкіндіктер"
+    },
+    "deadline": {
+      "untilDate": "{date} дейін",
+      "daysLeft": "{days} күн қалды",
+      "today": "Бүгін мерзімі",
+      "tomorrow": "Ертең мерзімі",
+      "passed": "Аяқталды"
+    }
   },
   "courses": {
     "title": "Курстар",

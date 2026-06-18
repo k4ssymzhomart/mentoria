@@ -74,7 +74,68 @@
   },
   "opportunities": {
     "title": "Возможности",
-    "subtitle": "Стипендии, олимпиады и программы со всего мира."
+    "subtitle": "Каждый конкурс, стипендия и программа, достойные вашего времени — в одном месте.",
+    "searchPlaceholder": "Поиск возможностей…",
+    "filtersButton": "Фильтры",
+    "sort": { "label": "Сортировка", "deadline": "По дедлайну (ближайшие)", "newest": "Сначала новые" },
+    "filters": {
+      "title": "Фильтры",
+      "clearAll": "Сбросить всё",
+      "active": "{count} активн.",
+      "type": "Тип",
+      "format": "Формат",
+      "direction": "Направление",
+      "subject": "Предмет",
+      "grade": "Класс",
+      "myGrade": "Мой класс",
+      "anyGrade": "Любой",
+      "deadline": "Дедлайн",
+      "deadlineAny": "Не важно",
+      "deadline30": "Ближайшие 30 дней",
+      "deadline90": "Ближайшие 90 дней"
+    },
+    "types": {
+      "olympiad": "Олимпиада", "hackathon": "Хакатон", "scholarship": "Стипендия",
+      "internship": "Стажировка", "summer_school": "Летняя школа", "research": "Исследование",
+      "volunteering": "Волонтёрство", "competition": "Конкурс", "conference": "Конференция"
+    },
+    "formats": { "online": "Онлайн", "offline": "Очно", "hybrid": "Гибрид" },
+    "card": { "save": "Сохранить", "saved": "Сохранено", "removeFilter": "Убрать фильтр" },
+    "save": {
+      "saved": "Сохранено",
+      "removed": "Удалено",
+      "error": "Что-то пошло не так. Попробуйте ещё раз.",
+      "signInTitle": "Войдите, чтобы сохранять",
+      "signInBody": "Сохраняйте возможности и отслеживайте заявки после входа."
+    },
+    "apply": { "apply": "Подать заявку", "applied": "Заявка подана", "appliedToast": "Отмечено как «подана»" },
+    "empty": {
+      "title": "Ничего не найдено по этим фильтрам",
+      "hint": "Попробуйте убрать фильтр или расширить поиск.",
+      "clear": "Сбросить фильтры"
+    },
+    "error": { "title": "Не удалось загрузить возможности", "retry": "Повторить" },
+    "results": { "range": "{from}–{to} из {total}", "total": "{total} результатов" },
+    "pagination": { "prev": "Назад", "next": "Вперёд" },
+    "detail": {
+      "back": "Возможности",
+      "grades": "Классы {min}–{max}",
+      "gradesUp": "До {max} класса",
+      "gradesFrom": "С {min} класса",
+      "anyGrade": "Все классы",
+      "organizer": "Организатор",
+      "location": "Место",
+      "description": "Описание",
+      "requirements": "Требования",
+      "related": "Похожие возможности"
+    },
+    "deadline": {
+      "untilDate": "До {date}",
+      "daysLeft": "Осталось {days, plural, one {# день} few {# дня} many {# дней} other {# дня}}",
+      "today": "Сегодня дедлайн",
+      "tomorrow": "Завтра дедлайн",
+      "passed": "Завершено"
+    }
   },
   "courses": {
     "title": "Курсы",

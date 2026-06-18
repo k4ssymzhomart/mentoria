@@ -74,7 +74,68 @@
   },
   "opportunities": {
     "title": "Opportunities",
-    "subtitle": "Scholarships, olympiads, and programs from around the world."
+    "subtitle": "Every competition, scholarship, and program worth your time — in one place.",
+    "searchPlaceholder": "Search opportunities…",
+    "filtersButton": "Filters",
+    "sort": { "label": "Sort", "deadline": "Deadline (soonest)", "newest": "Newest" },
+    "filters": {
+      "title": "Filters",
+      "clearAll": "Clear all",
+      "active": "{count} active",
+      "type": "Type",
+      "format": "Format",
+      "direction": "Direction",
+      "subject": "Subject",
+      "grade": "Grade",
+      "myGrade": "My grade",
+      "anyGrade": "Any",
+      "deadline": "Deadline",
+      "deadlineAny": "Any time",
+      "deadline30": "Next 30 days",
+      "deadline90": "Next 90 days"
+    },
+    "types": {
+      "olympiad": "Olympiad", "hackathon": "Hackathon", "scholarship": "Scholarship",
+      "internship": "Internship", "summer_school": "Summer school", "research": "Research",
+      "volunteering": "Volunteering", "competition": "Competition", "conference": "Conference"
+    },
+    "formats": { "online": "Online", "offline": "In person", "hybrid": "Hybrid" },
+    "card": { "save": "Save", "saved": "Saved", "removeFilter": "Remove filter" },
+    "save": {
+      "saved": "Saved",
+      "removed": "Removed",
+      "error": "Something went wrong. Please try again.",
+      "signInTitle": "Sign in to save",
+      "signInBody": "Save opportunities and track your applications once you sign in."
+    },
+    "apply": { "apply": "Apply", "applied": "Applied", "appliedToast": "Marked as applied" },
+    "empty": {
+      "title": "No opportunities match these filters",
+      "hint": "Try removing a filter or broadening your search.",
+      "clear": "Clear filters"
+    },
+    "error": { "title": "Couldn’t load opportunities", "retry": "Try again" },
+    "results": { "range": "{from}–{to} of {total}", "total": "{total} results" },
+    "pagination": { "prev": "Previous", "next": "Next" },
+    "detail": {
+      "back": "Opportunities",
+      "grades": "Grades {min}–{max}",
+      "gradesUp": "Up to grade {max}",
+      "gradesFrom": "Grade {min}+",
+      "anyGrade": "All grades",
+      "organizer": "Organizer",
+      "location": "Location",
+      "description": "About",
+      "requirements": "Requirements",
+      "related": "You might also like"
+    },
+    "deadline": {
+      "untilDate": "Until {date}",
+      "daysLeft": "{days, plural, one {# day left} other {# days left}}",
+      "today": "Due today",
+      "tomorrow": "Due tomorrow",
+      "passed": "Closed"
+    }
   },
   "courses": {
     "title": "Courses",

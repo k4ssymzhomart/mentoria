@@ -21,6 +21,20 @@ export async function getSessionUser(): Promise<SessionUser | null> {
   return user ? { id: user.id, email: user.email ?? null } : null;
 }
 
+/**
+ * The real Supabase auth user id (ignores dev-mock, which can't own DB rows
+ * because profiles.id references auth.users). Use this for ownership of saves,
+ * enrollments, etc. Returns null when there is no real session.
+ */
+export async function getAuthUserId(): Promise<string | null> {
+  if (!isSupabaseConfigured()) return null;
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  return user?.id ?? null;
+}
+
 /** The signed-in user's profile row (with role), or null when signed out. */
 export async function getProfile(): Promise<Profile | null> {
   if (isDevAuthEnabled()) {
