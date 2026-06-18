@@ -144,6 +144,11 @@ export interface Certificate {
   issued_at: string;
 }
 export type CertificateWithCourse = Certificate & { course: Course };
+/** The onboarding-writable slice of a profile. */
+export type ProfilePatch = Partial<
+  Pick<Profile, 'grade' | 'interests' | 'subjects' | 'goals' | 'onboarded' | 'locale'>
+>;
+
 export interface RoadmapItem {
   id: string;
   grade: number;

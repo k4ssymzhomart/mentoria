@@ -11,6 +11,7 @@ import type {
   Certificate,
   CertificateWithCourse,
   RoadmapItem,
+  ProfilePatch,
 } from './types';
 
 /**
@@ -29,6 +30,7 @@ export interface DataProvider {
   // ---- Personalization ---- [consumed: Phase 4 & 5]
   recommendOpportunities(interests: string[], grade: number | null, limit?: number): Promise<Opportunity[]>;
   recommendCourses(interests: string[], limit?: number): Promise<Course[]>;
+  updateProfile(userId: string, patch: ProfilePatch): Promise<void>;
 
   // ---- Student state ---- [consumed: Phase 2,3,4]
   listSaved(userId: string): Promise<SavedOpportunity[]>;

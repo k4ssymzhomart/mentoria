@@ -66,6 +66,22 @@ export async function requireUser(): Promise<SessionUser> {
   return user as SessionUser;
 }
 
+/**
+ * Gate for the personalized area (dashboard/calendar/roadmap): ensures a signed-in
+ * user has completed onboarding, redirecting unfinished profiles to the wizard.
+ * The `/onboarding` route itself calls only `requireUser` so it stays reachable.
+ */
+export async function requireOnboarding(): Promise<Profile> {
+  const profile = await getProfile();
+  if (!profile) {
+    redirect({ href: '/', locale: await getLocale() });
+  }
+  if (!(profile as Profile).onboarded) {
+    redirect({ href: '/onboarding', locale: await getLocale() });
+  }
+  return profile as Profile;
+}
+
 /** Gate for the (admin) area: redirects anyone who isn't an admin. */
 export async function requireAdmin(): Promise<Profile> {
   const profile = await getProfile();

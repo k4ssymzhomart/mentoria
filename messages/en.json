@@ -70,7 +70,53 @@
   },
   "dashboard": {
     "title": "Dashboard",
-    "subtitle": "Your progress, upcoming deadlines, and recommendations."
+    "subtitle": "Your progress, upcoming deadlines, and recommendations.",
+    "greeting": "Welcome back, {name}",
+    "greetingNoName": "Welcome back",
+    "firstRun": {
+      "title": "Your hub is ready",
+      "subtitle": "Here's where to start."
+    },
+    "stats": {
+      "inProgress": "Courses in progress",
+      "lessons": "Lessons completed",
+      "certificates": "Certificates",
+      "saved": "Saved opportunities"
+    },
+    "continueLearning": {
+      "title": "Continue learning",
+      "empty": "You haven't started a course yet.",
+      "browse": "Browse courses"
+    },
+    "deadlines": {
+      "title": "Upcoming deadlines",
+      "empty": "Save opportunities to track their deadlines.",
+      "viewCalendar": "View calendar",
+      "browse": "Browse opportunities"
+    },
+    "recommended": {
+      "title": "Recommended for you",
+      "opportunities": "Opportunities",
+      "courses": "Courses",
+      "empty": "Tell us your interests to get sharper recommendations.",
+      "browseOpps": "Browse opportunities",
+      "startCourse": "Start a course"
+    },
+    "why": "Because you're interested in {tags}",
+    "saved": {
+      "title": "Saved opportunities",
+      "saved": "Saved",
+      "applied": "Applied",
+      "viewAll": "View all",
+      "empty": "Nothing saved yet."
+    },
+    "certificates": {
+      "title": "Your certificates"
+    },
+    "quickLinks": {
+      "calendar": "Calendar",
+      "roadmap": "Roadmap"
+    }
   },
   "opportunities": {
     "title": "Opportunities",
@@ -211,11 +257,56 @@
   },
   "roadmap": {
     "title": "Personal plan",
-    "subtitle": "A step-by-step route toward your goals."
+    "subtitle": "A step-by-step route across grades 9–12.",
+    "grade": "Grade {grade}",
+    "add": "Add to roadmap",
+    "generate": "Generate starter roadmap",
+    "addManually": "Add manually",
+    "progress": "{done}/{total} done",
+    "empty": {
+      "title": "Build your plan",
+      "subtitle": "Generate a starter roadmap from your profile, or add items yourself."
+    },
+    "laneEmpty": "No items yet.",
+    "kind": {
+      "course": "Course",
+      "opportunity": "Opportunity",
+      "milestone": "Milestone"
+    },
+    "status": {
+      "todo": "To do",
+      "in_progress": "In progress",
+      "done": "Done"
+    },
+    "add_dialog": {
+      "title": "Add to roadmap",
+      "search": "Search…",
+      "grade": "Grade",
+      "milestoneLabel": "Milestone",
+      "milestonePlaceholder": "e.g. Take a timed mock SAT",
+      "add": "Add",
+      "cancel": "Cancel",
+      "noResults": "No matches."
+    },
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "moveGrade": "Move to grade {grade}",
+    "remove": "Remove",
+    "generated": "Starter roadmap created.",
+    "error": "Something went wrong. Try again."
   },
   "calendar": {
     "title": "Calendar",
-    "subtitle": "Deadlines, sessions, and reminders in one place."
+    "subtitle": "Deadlines for the opportunities you saved.",
+    "month": "Month",
+    "agenda": "Agenda",
+    "today": "Today",
+    "prev": "Previous month",
+    "next": "Next month",
+    "empty": "Save opportunities and their deadlines show up here.",
+    "browse": "Browse opportunities",
+    "nothingDue": "Nothing due this day.",
+    "due": "{count, plural, one {# deadline} other {# deadlines}}"
   },
   "admin": {
     "title": "Admin panel",
@@ -271,6 +362,41 @@
       "body": "You've finished every lesson. Your certificate is ready.",
       "view": "View certificate",
       "stay": "Keep reviewing"
+    }
+  },
+  "onboarding": {
+    "step": "Step {current} of {total}",
+    "back": "Back",
+    "next": "Next",
+    "finish": "Finish",
+    "skip": "Skip for now",
+    "building": "Building your hub…",
+    "tip": "Pick a couple of interests and your recommendations get sharper.",
+    "error": "Could not save. Please try again.",
+    "grade": {
+      "title": "What grade are you in?",
+      "subtitle": "We'll tailor recommendations to your year."
+    },
+    "interests": {
+      "title": "What are you interested in?",
+      "subtitle": "Pick a few directions — you can change these later.",
+      "hint": "Select at least one to continue."
+    },
+    "subjects": {
+      "title": "Which subjects?",
+      "subtitle": "Optional, but it sharpens your recommendations."
+    },
+    "goals": {
+      "title": "What are your goals?",
+      "subtitle": "Choose what matters most right now.",
+      "options": {
+        "university": "Get into a top university",
+        "olympiad": "Win an olympiad",
+        "exams": "Improve SAT / IELTS",
+        "scholarships": "Find scholarships",
+        "project": "Build a research or startup project",
+        "volunteer": "Volunteer / social impact"
+      }
     }
   }
 }

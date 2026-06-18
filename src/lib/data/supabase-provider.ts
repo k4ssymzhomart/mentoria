@@ -102,6 +102,11 @@ export const supabaseProvider: DataProvider = {
     const { data } = await s.rpc('recommend_courses', { p_interests: interests, p_limit: limit });
     return (data ?? []) as Course[];
   },
+  async updateProfile(userId, patch) {
+    const s = await createClient();
+    const { error } = await s.from('profiles').update(patch).eq('id', userId);
+    if (error) throw error;
+  },
 
   async listSaved(userId) {
     const s = await createClient();
