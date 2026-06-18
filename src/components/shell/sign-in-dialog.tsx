@@ -35,6 +35,7 @@ export function SignInDialog({
   open,
   onOpenChange,
   showTrigger = true,
+  triggerLabel,
   title,
   description,
 }: {
@@ -43,6 +44,7 @@ export function SignInDialog({
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   showTrigger?: boolean;
+  triggerLabel?: string;
   title?: string;
   description?: string;
 }) {
@@ -87,7 +89,7 @@ export function SignInDialog({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       {showTrigger ? (
-        <DialogTrigger render={<Button>{tc('signIn')}</Button>} />
+        <DialogTrigger render={<Button>{triggerLabel ?? tc('signIn')}</Button>} />
       ) : null}
       <DialogContent className="sm:max-w-md">
         <DialogHeader>

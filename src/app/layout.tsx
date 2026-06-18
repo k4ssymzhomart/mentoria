@@ -7,9 +7,23 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 import './globals.css';
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+
 export const metadata: Metadata = {
-  title: { default: 'Mentoria Hub', template: '%s · Mentoria Hub' },
+  metadataBase: new URL(siteUrl),
+  title: 'Mentoria Hub',
   description: 'Opportunities, courses, and a personal plan — in one place.',
+  openGraph: {
+    title: 'Mentoria Hub',
+    description: 'Opportunities, courses, and a personal plan — in one place.',
+    siteName: 'Mentoria Hub',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mentoria Hub',
+    description: 'Opportunities, courses, and a personal plan — in one place.',
+  },
 };
 
 // Single root layout: it owns <html>/<body> for BOTH the localized tree and the

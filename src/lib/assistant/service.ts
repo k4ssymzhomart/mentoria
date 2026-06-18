@@ -1,20 +1,23 @@
 import 'server-only';
-import Anthropic from '@anthropic-ai/sdk';
 import { getTranslations } from 'next-intl/server';
 import { db } from '@/lib/data/provider';
 import { getProfile } from '@/lib/auth';
 import { tl } from '@/lib/data/types';
 import type { Localized, Opportunity, Course, Tag } from '@/lib/data/types';
 import { interestVector, overlapLabels } from '@/lib/personalization/recommend';
+import { stripAssistantArtifacts, stripCatalogMarkers } from './format';
 import type { AssistantContext, ChatMessage, DraftItem, RefItem } from './types';
 
 // Sonnet-class per the Phase 5 spec (latency/cost balance for a streaming chat
 // assistant); overridable via ANTHROPIC_MODEL. Server-only — the key never ships
 // to the client.
 const MODEL = process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-6';
+const ANTHROPIC_VERSION = '2023-06-01';
+const ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages';
 
 export function isAiConfigured(): boolean {
-  return Boolean(process.env.ANTHROPIC_API_KEY);
+  const key = process.env.ANTHROPIC_API_KEY;
+  return Boolean(key && !key.includes('placeholder'));
 }
 
 const LOCALE_NAME: Record<string, string> = { en: 'English', ru: 'Russian', kk: 'Kazakh' };
@@ -26,6 +29,7 @@ type Candidate = {
   tags: string[];
   deadline?: string | null;
   href: string;
+  slug?: string;
 };
 
 type Grounding = {
@@ -51,7 +55,7 @@ async function buildGrounding(context: AssistantContext): Promise<Grounding> {
   const push = (o: Opportunity) =>
     candidates.push({ id: o.id, kind: 'opportunity', title: o.title, tags: o.tags, deadline: o.deadline, href: `/opportunities/${o.id}` });
   const pushCourse = (c: Course) =>
-    candidates.push({ id: c.id, kind: 'course', title: c.title, tags: c.tags, href: `/courses/${c.slug}` });
+    candidates.push({ id: c.id, kind: 'course', title: c.title, tags: c.tags, href: `/courses/${c.slug}`, slug: c.slug });
   opps.forEach(push);
   courses.forEach(pushCourse);
 
@@ -62,7 +66,7 @@ async function buildGrounding(context: AssistantContext): Promise<Grounding> {
       if (o) candidates.unshift({ id: o.id, kind: 'opportunity', title: o.title, tags: o.tags, deadline: o.deadline, href: `/opportunities/${o.id}` });
     } else {
       const c = (await db.listCourses()).find((x) => x.id === context.itemId);
-      if (c) candidates.unshift({ id: c.id, kind: 'course', title: c.title, tags: c.tags, href: `/courses/${c.slug}` });
+      if (c) candidates.unshift({ id: c.id, kind: 'course', title: c.title, tags: c.tags, href: `/courses/${c.slug}`, slug: c.slug });
     }
   }
 
@@ -70,7 +74,15 @@ async function buildGrounding(context: AssistantContext): Promise<Grounding> {
 }
 
 function toRef(c: Candidate, locale: string): RefItem {
-  return { id: c.id, kind: c.kind, title: c.title, label: tl(c.title, locale), href: c.href, grade: c.kind === 'course' ? 10 : 11 };
+  return {
+    id: c.id,
+    kind: c.kind,
+    title: c.title,
+    label: tl(c.title, locale),
+    href: c.href,
+    grade: c.kind === 'course' ? 10 : 11,
+    lookupKeys: [c.id, c.slug].filter(Boolean) as string[],
+  };
 }
 
 /**
@@ -118,13 +130,19 @@ function withinRateLimit(userId: string): boolean {
 function systemPrompt(localeName: string, grounding: Grounding): string {
   const profile = grounding.profile;
   const ctx = grounding.candidates
-    .map((c) => `- [${c.kind}:${c.id}] ${tl(c.title, 'en')} (tags: ${c.tags.join(', ') || 'none'}${c.deadline ? `, deadline: ${c.deadline}` : ''})`)
+    .map((c) => {
+      const marker = c.kind === 'course' && c.slug ? `[course:${c.slug}]` : `[opportunity:${c.id}]`;
+      return `- ${marker} ${tl(c.title, 'en')} (id: ${c.id}, tags: ${c.tags.join(', ') || 'none'}${c.deadline ? `, deadline: ${c.deadline}` : ''})`;
+    })
     .join('\n');
   const interests = [...(profile?.interests ?? []), ...(profile?.subjects ?? [])].join(', ') || 'none';
   return [
     'You are the Mentoria Assistant, a concise, encouraging academic mentor for students in grades 8–11.',
     `Always answer in ${localeName}. Keep replies under 120 words.`,
     'Only discuss items present in the catalog context below; never invent programs, deadlines, fees, or URLs.',
+    'When you name a catalog item, include its exact marker from context once, immediately after the item name.',
+    'Markers are UI instructions, not prose. Never put markers in code blocks, quotes, tables, or JSON.',
+    'Do not wrap the whole answer in Markdown code fences. Do not output raw JSON in chat answers.',
     'If nothing in the context fits, say so plainly and suggest broadening interests rather than fabricating.',
     'Remind the student to confirm deadlines and links on the official source. Be honest about uncertainty.',
     `Student profile: grade ${profile?.grade ?? 'unknown'}; interests: ${interests}.`,
@@ -132,6 +150,76 @@ function systemPrompt(localeName: string, grounding: Grounding): string {
     'Catalog context (the only items you may reference):',
     ctx || '(no matching items)',
   ].join('\n');
+}
+
+async function anthropicStream({
+  system,
+  messages,
+  maxTokens,
+}: {
+  system: string;
+  messages: ChatMessage[];
+  maxTokens: number;
+}) {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) throw new Error('Missing Anthropic key');
+
+  const response = await fetch(ANTHROPIC_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': ANTHROPIC_VERSION,
+    },
+    body: JSON.stringify({
+      model: MODEL,
+      max_tokens: maxTokens,
+      system,
+      messages: messages.map((m) => ({ role: m.role, content: m.content })),
+      stream: true,
+    }),
+  });
+
+  if (!response.ok || !response.body) {
+    throw new Error(`Anthropic stream failed: ${response.status}`);
+  }
+
+  return response.body.getReader();
+}
+
+async function anthropicMessage({
+  system,
+  content,
+  maxTokens,
+}: {
+  system: string;
+  content: string;
+  maxTokens: number;
+}): Promise<unknown> {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) throw new Error('Missing Anthropic key');
+
+  const response = await fetch(ANTHROPIC_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': ANTHROPIC_VERSION,
+    },
+    body: JSON.stringify({
+      model: MODEL,
+      max_tokens: maxTokens,
+      system,
+      messages: [{ role: 'user', content }],
+      stream: false,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Anthropic message failed: ${response.status}`);
+  }
+
+  return response.json();
 }
 
 /**
@@ -153,20 +241,38 @@ export async function runAssistant(userId: string, locale: string, messages: Cha
       let gotText = false;
       try {
         if (isAiConfigured() && withinRateLimit(userId)) {
-          const client = new Anthropic();
-          const stream = client.messages.stream({
-            model: MODEL,
-            max_tokens: 400,
+          const reader = await anthropicStream({
+            maxTokens: 400,
             system: systemPrompt(LOCALE_NAME[locale] ?? 'English', grounding),
-            messages: messages.map((m) => ({ role: m.role, content: m.content })),
+            messages,
           });
-          for await (const ev of stream) {
-            if (ev.type === 'content_block_delta' && ev.delta.type === 'text_delta' && ev.delta.text) {
-              gotText = true;
-              line({ type: 'text', text: ev.delta.text });
+
+          const decoder = new TextDecoder();
+          let buffer = '';
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split('\n');
+            buffer = lines.pop() ?? '';
+
+            for (const rawLine of lines) {
+              const cleanLine = rawLine.trim();
+              if (!cleanLine.startsWith('data:')) continue;
+              const json = cleanLine.slice(5).trim();
+              if (!json || json === '[DONE]') continue;
+
+              const event = JSON.parse(json) as {
+                type?: string;
+                delta?: { type?: string; text?: string };
+              };
+              if (event.type === 'content_block_delta' && event.delta?.type === 'text_delta' && event.delta.text) {
+                gotText = true;
+                line({ type: 'text', text: event.delta.text });
+              }
             }
           }
-          await stream.finalMessage();
         }
       } catch {
         // fall through to deterministic answer
@@ -287,29 +393,23 @@ export async function draftRoadmap(userId: string, locale: string): Promise<{ it
   ];
 
   try {
-    const client = new Anthropic();
-    const message = await client.messages.create({
-      model: MODEL,
-      max_tokens: 700,
+    const message = await anthropicMessage({
+      maxTokens: 700,
       system: [
         'You draft concise educational roadmaps for students in grades 9-12.',
         `Answer only with valid JSON. Use ${LOCALE_NAME[locale] ?? 'English'} for rationale text.`,
         'Use only the provided real catalog ids. Do not invent ids, deadlines, links, or programs.',
         'Return an array of 5-8 objects: {"kind":"course"|"opportunity","ref_id":"...","grade":9|10|11|12,"rationale":"short reason"}.',
+        'Do not wrap the JSON in Markdown code fences. Do not include catalog markers in rationale.',
       ].join('\n'),
-      messages: [
-        {
-          role: 'user',
-          content: JSON.stringify({
-            student: {
-              grade: profile?.grade ?? null,
-              interests: vector,
-              goals: profile?.goals ?? [],
-            },
-            catalog: candidates,
-          }),
+      content: JSON.stringify({
+        student: {
+          grade: profile?.grade ?? null,
+          interests: vector,
+          goals: profile?.goals ?? [],
         },
-      ],
+        catalog: candidates,
+      }),
     });
     const parsed = extractJsonArray(messageText(message));
     if (!parsed) return { items: fallbackItems, fallback: true };
@@ -327,13 +427,17 @@ export async function draftRoadmap(userId: string, locale: string): Promise<{ it
       if (!source) continue;
       seen.add(`${kind}:${refId}`);
       const fallbackRationale = overlapLabels(source.tags, vector, tagMap, locale).join(', ');
+      const modelRationale =
+        typeof row.rationale === 'string'
+          ? stripCatalogMarkers(stripAssistantArtifacts(row.rationale))
+          : '';
       items.push({
         kind,
         ref_id: source.id,
         title: source.title,
         label: tl(source.title, locale),
         grade,
-        rationale: typeof row.rationale === 'string' && row.rationale.trim() ? row.rationale.trim() : fallbackRationale,
+        rationale: modelRationale || fallbackRationale,
       });
     }
     return items.length ? { items: items.sort((a, b) => a.grade - b.grade), fallback: false } : { items: fallbackItems, fallback: true };

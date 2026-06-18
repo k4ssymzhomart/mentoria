@@ -21,6 +21,7 @@ export interface RefItem {
   label: string;
   href: string;
   grade: number;
+  lookupKeys: string[];
 }
 
 /** One item in an AI-drafted roadmap preview (always a real, validated item). */

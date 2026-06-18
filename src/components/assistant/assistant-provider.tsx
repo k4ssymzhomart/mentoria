@@ -9,7 +9,17 @@ import {
   useState,
   useTransition,
 } from 'react';
-import { Bookmark, Eye, MessageCircle, Plus, RotateCcw, Send, Square } from 'lucide-react';
+import {
+  Bookmark,
+  Eye,
+  GraduationCap,
+  MessageCircle,
+  Plus,
+  RotateCcw,
+  Send,
+  Square,
+  Trophy,
+} from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import { Link } from '@/i18n/navigation';
@@ -23,6 +33,12 @@ import {
   SheetDescription,
 } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
+import {
+  hideTrailingPartialMarker,
+  parseAssistantRefMarker,
+  shortenMarkerValue,
+  stripAssistantArtifacts,
+} from '@/lib/assistant/format';
 import type { AssistantContext, ChatMessage, RefItem } from '@/lib/assistant/types';
 import { saveOpportunityAction } from '@/lib/opportunities/actions';
 import { upsertRoadmapItemAction } from '@/lib/personalization/actions';
@@ -275,6 +291,7 @@ export function AssistantProvider({ children }: { children: React.ReactNode }) {
 function AssistantMessage({ message }: { message: UiMessage }) {
   const t = useTranslations('assistant');
   const mine = message.role === 'user';
+  const content = message.content || t('thinking');
 
   return (
     <div className={cn('flex', mine ? 'justify-end' : 'justify-start')}>
@@ -288,7 +305,11 @@ function AssistantMessage({ message }: { message: UiMessage }) {
           {!mine && message.fallback ? (
             <p className="mb-2 text-xs font-medium text-muted-foreground">{t('unavailable')}</p>
           ) : null}
-          <p className="whitespace-pre-line">{message.content || t('thinking')}</p>
+          {mine ? (
+            <p className="whitespace-pre-line">{content}</p>
+          ) : (
+            <AssistantRichText content={content} refs={message.refs ?? []} />
+          )}
         </div>
         {!mine && message.refs?.length ? (
           <div className="space-y-2">
@@ -299,6 +320,96 @@ function AssistantMessage({ message }: { message: UiMessage }) {
         ) : null}
       </div>
     </div>
+  );
+}
+
+const ASSISTANT_INLINE_RE =
+  /(\*\*[^*\n]+?\*\*|`[^`\n]+?`|\[(?:course|opp|opportunity):[^\]\s]+\])/gi;
+
+function AssistantRichText({ content, refs }: { content: string; refs: RefItem[] }) {
+  const t = useTranslations('assistant');
+  const clean = hideTrailingPartialMarker(stripAssistantArtifacts(content));
+  const paragraphs = clean ? clean.split(/\n{2,}/) : [content];
+  const labels = {
+    course: t('kind.course'),
+    opportunity: t('kind.opportunity'),
+  };
+
+  return (
+    <div className="space-y-2">
+      {paragraphs.map((paragraph, index) => (
+        <p key={`${paragraph.slice(0, 12)}:${index}`} className="whitespace-pre-wrap">
+          {renderInlineAssistantContent(paragraph, refs, labels)}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+function renderInlineAssistantContent(
+  content: string,
+  refs: RefItem[],
+  labels: Record<'course' | 'opportunity', string>,
+) {
+  const parts = content.split(ASSISTANT_INLINE_RE);
+  return parts.map((part, index) => {
+    if (!part) return null;
+
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>;
+    }
+
+    if (part.startsWith('`') && part.endsWith('`')) {
+      return (
+        <code key={index} className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">
+          {part.slice(1, -1)}
+        </code>
+      );
+    }
+
+    const marker = parseAssistantRefMarker(part);
+    if (marker) {
+      const ref = refs.find(
+        (item) =>
+          item.kind === marker.kind &&
+          (item.lookupKeys.includes(marker.value) || item.href.split('/').pop() === marker.value),
+      );
+      return <AssistantInlineRef key={index} marker={marker} refItem={ref} label={labels[marker.kind]} />;
+    }
+
+    return part;
+  });
+}
+
+function AssistantInlineRef({
+  marker,
+  refItem,
+  label,
+}: {
+  marker: NonNullable<ReturnType<typeof parseAssistantRefMarker>>;
+  refItem?: RefItem;
+  label: string;
+}) {
+  const Icon = marker.kind === 'course' ? GraduationCap : Trophy;
+  const text = refItem?.label ?? shortenMarkerValue(marker.value);
+  const className =
+    'mx-0.5 inline-flex max-w-full items-center gap-1 rounded-md border bg-muted/50 px-1.5 py-0.5 align-baseline text-xs font-medium text-foreground transition-colors hover:bg-muted';
+
+  if (refItem) {
+    return (
+      <Link href={refItem.href} className={className}>
+        <Icon className="size-3" aria-hidden />
+        <span className="truncate">{text}</span>
+      </Link>
+    );
+  }
+
+  return (
+    <span className={className} title={marker.value}>
+      <Icon className="size-3" aria-hidden />
+      <span className="text-muted-foreground">{label}</span>
+      <span className="truncate">{text}</span>
+    </span>
   );
 }
 
@@ -342,7 +453,7 @@ function AssistantRefCard({ item }: { item: RefItem }) {
   }
 
   return (
-    <div className="rounded-md border bg-background p-3">
+    <div id={`assistant-ref-${item.kind}-${item.id}`} className="scroll-mt-4 rounded-md border bg-background p-3">
       <div className="space-y-1">
         <p className="line-clamp-2 text-sm font-medium">{item.label}</p>
         <p className="text-xs uppercase tracking-wide text-muted-foreground">{t(`kind.${item.kind}`)}</p>

@@ -9,7 +9,20 @@
     "loading": "Loading…",
     "comingSoon": "Arriving in later phases",
     "backHome": "Back home",
-    "openMenu": "Open menu"
+    "openMenu": "Open menu",
+    "skipToContent": "Skip to content"
+  },
+  "states": {
+    "error": {
+      "title": "Something went wrong",
+      "body": "The page did not load cleanly. Try again and your place will be restored.",
+      "retry": "Try again"
+    },
+    "notFound": {
+      "title": "This page is not available",
+      "body": "It may have moved, been unpublished, or the link may be incomplete.",
+      "home": "Back home"
+    }
   },
   "nav": {
     "opportunities": "Opportunities",
@@ -48,24 +61,56 @@
     "errorBody": "The link may have expired or already been used. Please try signing in again."
   },
   "landing": {
-    "badge": "Phase 0 · Foundations",
-    "title": "Your path to scholarships, exams, and university — in one place.",
-    "subtitle": "Mentoria Hub brings opportunities, structured courses, and a personal plan together. Built for students in Kazakhstan and beyond.",
-    "ctaBrowse": "Browse opportunities",
-    "ctaCourses": "Explore courses",
-    "features": {
-      "opportunities": {
-        "title": "Opportunities",
-        "description": "Scholarships, olympiads, and programs — with filters and deadlines."
+    "badge": "Mentoria Hub",
+    "title": "Every opportunity. Every course. One place to grow.",
+    "subtitle": "A trilingual hub where students in grades 8–11 discover opportunities, learn on their own schedule, and build a personal roadmap.",
+    "ctaBrowse": "Find opportunities",
+    "ctaCourses": "Start learning",
+    "joinTitle": "Join Mentoria",
+    "joinBody": "Sign in to save opportunities, learn, and build your roadmap.",
+    "visual": {
+      "dashboard": "Personal dashboard",
+      "roadmap": "Roadmap",
+      "grade": "Grade {grade}"
+    },
+    "problem": {
+      "title": "Students should not have to chase their future through scattered chats.",
+      "body": "Olympiads, scholarships, deadlines, courses, and advice often live in different channels. Live lessons are not always possible. It is hard to know what fits your grade, interests, and goals.",
+      "solution": "Mentoria Hub brings discovery, asynchronous learning, recommendations, an AI mentor, and admin publishing into one organized product."
+    },
+    "engines": {
+      "title": "Three engines, one path",
+      "subtitle": "Discovery, learning, and personalization work together instead of as separate tools.",
+      "discover": {
+        "title": "Discover",
+        "body": "Search and filter opportunities, save them, track deadlines, and apply with confidence."
       },
-      "courses": {
-        "title": "Courses",
-        "description": "SAT EBRW, IELTS, and admissions — lessons, materials, and quizzes."
+      "learn": {
+        "title": "Learn",
+        "body": "Self-paced courses with lessons, materials, quizzes, progress, and certificates."
       },
-      "roadmap": {
-        "title": "Personal plan",
-        "description": "Steps tailored to your goals — from prep to applications."
+      "personalized": {
+        "title": "Personalized",
+        "body": "Onboarding, recommendations, roadmap planning, and grounded AI guidance."
       }
+    },
+    "audience": {
+      "students": {
+        "title": "For students",
+        "body": "Clear next steps, fewer missed deadlines, and courses that fit school schedules."
+      },
+      "mentoria": {
+        "title": "For Mentoria",
+        "body": "A scalable operations console that publishes new programs live without rebuilding the site."
+      }
+    },
+    "trust": {
+      "languages": "Русский · English · Қазақша",
+      "device": "Works on any device",
+      "anytime": "Learn anytime"
+    },
+    "closing": {
+      "title": "Start with one opportunity, one lesson, or one plan."
     }
   },
   "dashboard": {

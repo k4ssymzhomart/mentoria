@@ -12,6 +12,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { upsertRoadmapItemAction } from '@/lib/personalization/actions';
+import { stripAssistantArtifacts, stripCatalogMarkers } from '@/lib/assistant/format';
 import type { DraftItem } from '@/lib/assistant/types';
 
 export function RoadmapDraftButton({ onAccepted }: { onAccepted: () => void }) {
@@ -102,8 +103,8 @@ export function RoadmapDraftButton({ onAccepted }: { onAccepted: () => void }) {
                       <p className="text-xs text-muted-foreground">
                         {tr('grade', { grade: item.grade })} · {tr(`kind.${item.kind}`)}
                       </p>
-                      {item.rationale ? (
-                        <p className="text-xs text-muted-foreground">{item.rationale}</p>
+                      {cleanRationale(item.rationale) ? (
+                        <p className="text-xs text-muted-foreground">{cleanRationale(item.rationale)}</p>
                       ) : null}
                     </div>
                     <Button
@@ -133,4 +134,8 @@ export function RoadmapDraftButton({ onAccepted }: { onAccepted: () => void }) {
       </Dialog>
     </>
   );
+}
+
+function cleanRationale(value: string) {
+  return stripCatalogMarkers(stripAssistantArtifacts(value));
 }

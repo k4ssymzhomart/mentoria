@@ -9,12 +9,12 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "seed": "tsx scripts/seed.ts",
+    "demo:prime": "tsx scripts/demo-prime.ts",
     "smoke": "tsx scripts/smoke.ts",
     "db:migrate": "node scripts/apply-migrations.mjs",
     "db:check": "node scripts/check-db.mjs"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.105.0",
     "@base-ui/react": "^1.5.0",
     "@supabase/ssr": "^0.12.0",
     "@supabase/supabase-js": "^2.108.2",

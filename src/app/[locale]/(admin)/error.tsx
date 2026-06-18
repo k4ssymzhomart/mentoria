@@ -2,6 +2,6 @@
 
 import { RouteErrorBoundary } from '@/components/route-error-boundary';
 
-export default function OpportunitiesError({ reset }: { error: Error; reset: () => void }) {
+export default function AdminSectionError({ reset }: { error: Error; reset: () => void }) {
   return <RouteErrorBoundary reset={reset} />;
 }
