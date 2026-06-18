@@ -3,11 +3,10 @@ import { cookies } from 'next/headers';
 import { createClient } from '@/utils/supabase/server';
 import { isSupabaseConfigured } from '@/lib/env';
 import { DEV_ROLE_COOKIE } from '@/lib/dev-auth';
+import { absoluteAppUrl } from '@/lib/request-origin';
 
 // POST-only so link prefetch / CSRF can't sign a user out. The user menu submits a form.
 export async function POST(request: Request) {
-  const { origin } = new URL(request.url);
-
   if (isSupabaseConfigured()) {
     const supabase = await createClient();
     await supabase.auth.signOut();
@@ -17,5 +16,5 @@ export async function POST(request: Request) {
   const store = await cookies();
   store.delete(DEV_ROLE_COOKIE);
 
-  return NextResponse.redirect(`${origin}/`, { status: 303 });
+  return NextResponse.redirect(absoluteAppUrl(request, '/'), { status: 303 });
 }

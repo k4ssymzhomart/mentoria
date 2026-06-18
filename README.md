@@ -31,10 +31,10 @@ Auth resolution lives in [`src/lib/auth.ts`](src/lib/auth.ts): dev role-cookie f
 
 1. **Supabase project** — create one; note the Project URL, Publishable key (`sb_publishable_…`, or legacy anon), and Secret key.
 2. **Google OAuth** (Google Cloud Console → Credentials → OAuth client ID, *Web application*):
-   - JS origins: `http://localhost:3000` and your production domain.
+   - JS origins: `http://localhost:3000` and `https://mentoria-7cd5.onrender.com`.
    - Redirect URI: the Supabase callback `https://<project-ref>.supabase.co/auth/v1/callback`.
-3. **Wire Google into Supabase** → Authentication → Providers → Google (paste client id/secret). Under URL Configuration add redirect patterns `http://localhost:3000/**`, `https://<your-domain>/**`, `https://*-<team>.vercel.app/**`.
-4. **Run migrations** with `npm run db:migrate <file.sql ...>` once `SUPABASE_ACCESS_TOKEN` is available, or apply the SQL in `supabase/migrations/` through the Supabase SQL editor. Then run `npm run db:check`.
+3. **Wire Google into Supabase** → Authentication → Providers → Google (paste client id/secret). Under URL Configuration add redirect patterns `http://localhost:3000/**`, `https://mentoria-7cd5.onrender.com/**`, `https://*-<team>.vercel.app/**`.
+4. **Run migrations** with `npm run db:migrate <file.sql ...>` once `SUPABASE_ACCESS_TOKEN` is available, or apply the SQL in `supabase/migrations/` through the Supabase SQL editor. Then run `npm run db:check`. For the Render deployment, make sure `supabase/migrations/0004_auth_profile_defaults.sql` is applied so Google users get a default `student` profile.
 5. **Env vars** — fill `.env.local` (see `.env.example`) and set `NEXT_PUBLIC_DEV_AUTH=false`.
 6. **Seed catalog** — run `npm run seed`.
 7. **Become admin** — after your first sign-in: `update public.profiles set role='admin' where email='you@example.com';`
@@ -77,4 +77,4 @@ src/app/auth/             # OAuth/magic-link callbacks, sign-out, dev sign-in
 
 ## Deploy (Vercel)
 
-Import the repo, add the same env vars, deploy, then register the final production domain in Google and Supabase. Required runtime vars are `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_DEV_AUTH=false`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, and optionally `ANTHROPIC_API_KEY` / `ANTHROPIC_MODEL`. `SUPABASE_SECRET_KEY` is for seed/demo scripts and CI only; it is not used in client code.
+Import the repo, add the same env vars, deploy, then register the final production domain in Google and Supabase. Required runtime vars are `NEXT_PUBLIC_SITE_URL=https://mentoria-7cd5.onrender.com`, `NEXT_PUBLIC_DEV_AUTH=false`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, and optionally `ANTHROPIC_API_KEY` / `ANTHROPIC_MODEL`. `SUPABASE_SECRET_KEY` is for seed/demo scripts and CI only; it is not used in client code.
