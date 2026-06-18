@@ -310,7 +310,150 @@
   },
   "admin": {
     "title": "Панель администратора",
-    "subtitle": "Управление контентом, возможностями и пользователями."
+    "subtitle": "Управление контентом, возможностями, курсами и пользователями.",
+    "nav": {
+      "overview": "Обзор",
+      "opportunities": "Возможности",
+      "courses": "Курсы",
+      "users": "Пользователи",
+      "studentView": "К виду студента"
+    },
+    "stats": {
+      "users": "Пользователи",
+      "opportunities": "Опубликованные возможности",
+      "courses": "Опубликованные курсы",
+      "enrollments": "Записи на курсы",
+      "completions": "Завершения",
+      "saves": "Сохранения"
+    },
+    "actions": {
+      "newOpportunity": "Новая возможность",
+      "newCourse": "Новый курс",
+      "createCourse": "Создать курс",
+      "save": "Сохранить",
+      "edit": "Редактировать",
+      "publish": "Опубликовать",
+      "unpublish": "Снять с публикации",
+      "delete": "Удалить",
+      "addLesson": "Добавить урок",
+      "moveUp": "Вверх",
+      "moveDown": "Вниз",
+      "deleteQuiz": "Удалить квиз"
+    },
+    "confirm": {
+      "deleteOpportunity": "Удалить эту возможность? Связанные сохранения будут удалены.",
+      "deleteCourse": "Удалить этот курс и все уроки?",
+      "deleteLesson": "Удалить этот урок и квиз?",
+      "deleteQuiz": "Удалить этот квиз?",
+      "unpublish": "Снять с публикации?"
+    },
+    "toast": {
+      "saved": "Сохранено.",
+      "error": "Что-то пошло не так.",
+      "validation": "Заполните обязательные поля."
+    },
+    "charts": {
+      "byType": "Возможности по типу",
+      "byTag": "Главные теги возможностей"
+    },
+    "recent": {
+      "opportunities": "Недавние возможности",
+      "courses": "Недавние курсы"
+    },
+    "status": {
+      "published": "Опубликовано",
+      "draft": "Черновик"
+    },
+    "opportunities": {
+      "title": "Возможности",
+      "subtitle": "Создавайте, переводите, тегируйте и публикуйте каталог."
+    },
+    "courses": {
+      "title": "Курсы",
+      "subtitle": "Управляйте метаданными и открывайте курс для редактирования уроков.",
+      "back": "Курсы",
+      "editorSubtitle": "Метаданные, уроки, материалы и квизы.",
+      "meta": "Метаданные курса"
+    },
+    "lessons": {
+      "title": "Уроки",
+      "count": "{count, plural, one {# урок} few {# урока} many {# уроков} other {# уроков}}"
+    },
+    "fields": {
+      "title": "Название",
+      "summary": "Кратко",
+      "description": "Описание",
+      "requirements": "Требования",
+      "type": "Тип",
+      "format": "Формат",
+      "gradeMin": "Класс от",
+      "gradeMax": "Класс до",
+      "deadline": "Дедлайн",
+      "organizer": "Организатор",
+      "location": "Локация",
+      "applyUrl": "Ссылка подачи",
+      "imageUrl": "Ссылка изображения",
+      "tags": "Теги",
+      "featured": "Избранное",
+      "published": "Опубликовано",
+      "slug": "Slug",
+      "estimatedHours": "Часы",
+      "subject": "Предмет",
+      "difficulty": "Уровень",
+      "coverUrl": "Обложка",
+      "lessons": "Уроки",
+      "status": "Статус",
+      "position": "Позиция",
+      "contentType": "Тип контента",
+      "duration": "Длительность (мин)",
+      "body": "Текст урока",
+      "videoUrl": "Видео URL",
+      "materials": "Материалы",
+      "materialLabel": "Материал {n}: название",
+      "materialUrl": "Ссылка материала",
+      "quiz": "Квиз",
+      "quizTitle": "Название квиза",
+      "passingScore": "Проходной балл",
+      "question": "Вопрос {n}",
+      "prompt": "Формулировка",
+      "option": "Вариант {n}",
+      "correct": "Правильный"
+    },
+    "tagKind": {
+      "direction": "Направления",
+      "subject": "Предметы"
+    },
+    "contentType": {
+      "text": "Текст",
+      "video": "Видео"
+    },
+    "table": {
+      "title": "Название",
+      "actions": "Действия"
+    },
+    "filters": {
+      "search": "Поиск…"
+    },
+    "empty": {
+      "opportunities": "Возможностей пока нет.",
+      "courses": "Курсов пока нет.",
+      "lessons": "Уроков пока нет.",
+      "users": "Пользователей пока нет."
+    },
+    "users": {
+      "title": "Пользователи",
+      "subtitle": "Профили только для просмотра.",
+      "name": "Имя",
+      "email": "Email",
+      "role": "Роль",
+      "grade": "Класс",
+      "onboarded": "Онбординг",
+      "joined": "Создан"
+    },
+    "common": {
+      "yes": "Да",
+      "no": "Нет"
+    }
   },
   "footer": {
     "tagline": "Создано для студентов.",

@@ -310,7 +310,150 @@
   },
   "admin": {
     "title": "Admin panel",
-    "subtitle": "Manage content, opportunities, and users."
+    "subtitle": "Manage content, opportunities, courses, and users.",
+    "nav": {
+      "overview": "Overview",
+      "opportunities": "Opportunities",
+      "courses": "Courses",
+      "users": "Users",
+      "studentView": "Back to student view"
+    },
+    "stats": {
+      "users": "Users",
+      "opportunities": "Published opportunities",
+      "courses": "Published courses",
+      "enrollments": "Enrollments",
+      "completions": "Completions",
+      "saves": "Saved opportunities"
+    },
+    "actions": {
+      "newOpportunity": "New opportunity",
+      "newCourse": "New course",
+      "createCourse": "Create course",
+      "save": "Save",
+      "edit": "Edit",
+      "publish": "Publish",
+      "unpublish": "Unpublish",
+      "delete": "Delete",
+      "addLesson": "Add lesson",
+      "moveUp": "Up",
+      "moveDown": "Down",
+      "deleteQuiz": "Delete quiz"
+    },
+    "confirm": {
+      "deleteOpportunity": "Delete this opportunity? Saves referencing it will be removed.",
+      "deleteCourse": "Delete this course and all lessons?",
+      "deleteLesson": "Delete this lesson and its quiz?",
+      "deleteQuiz": "Delete this quiz?",
+      "unpublish": "Unpublish this item?"
+    },
+    "toast": {
+      "saved": "Saved.",
+      "error": "Something went wrong.",
+      "validation": "Fill the required fields."
+    },
+    "charts": {
+      "byType": "Opportunities by type",
+      "byTag": "Top opportunity tags"
+    },
+    "recent": {
+      "opportunities": "Recent opportunities",
+      "courses": "Recent courses"
+    },
+    "status": {
+      "published": "Published",
+      "draft": "Draft"
+    },
+    "opportunities": {
+      "title": "Opportunities",
+      "subtitle": "Create, localize, tag, and publish catalog items."
+    },
+    "courses": {
+      "title": "Courses",
+      "subtitle": "Manage course metadata and open a course to edit lessons.",
+      "back": "Courses",
+      "editorSubtitle": "Meta, lessons, materials, and quiz content.",
+      "meta": "Course meta"
+    },
+    "lessons": {
+      "title": "Lessons",
+      "count": "{count, plural, one {# lesson} other {# lessons}}"
+    },
+    "fields": {
+      "title": "Title",
+      "summary": "Summary",
+      "description": "Description",
+      "requirements": "Requirements",
+      "type": "Type",
+      "format": "Format",
+      "gradeMin": "Grade min",
+      "gradeMax": "Grade max",
+      "deadline": "Deadline",
+      "organizer": "Organizer",
+      "location": "Location",
+      "applyUrl": "Apply URL",
+      "imageUrl": "Image URL",
+      "tags": "Tags",
+      "featured": "Featured",
+      "published": "Published",
+      "slug": "Slug",
+      "estimatedHours": "Estimated hours",
+      "subject": "Subject",
+      "difficulty": "Difficulty",
+      "coverUrl": "Cover URL",
+      "lessons": "Lessons",
+      "status": "Status",
+      "position": "Position",
+      "contentType": "Content type",
+      "duration": "Duration (min)",
+      "body": "Body",
+      "videoUrl": "Video URL",
+      "materials": "Materials",
+      "materialLabel": "Material {n} label",
+      "materialUrl": "Material URL",
+      "quiz": "Quiz",
+      "quizTitle": "Quiz title",
+      "passingScore": "Passing score",
+      "question": "Question {n}",
+      "prompt": "Prompt",
+      "option": "Option {n}",
+      "correct": "Correct"
+    },
+    "tagKind": {
+      "direction": "Directions",
+      "subject": "Subjects"
+    },
+    "contentType": {
+      "text": "Text",
+      "video": "Video"
+    },
+    "table": {
+      "title": "Title",
+      "actions": "Actions"
+    },
+    "filters": {
+      "search": "Search…"
+    },
+    "empty": {
+      "opportunities": "No opportunities yet.",
+      "courses": "No courses yet.",
+      "lessons": "No lessons yet.",
+      "users": "No users yet."
+    },
+    "users": {
+      "title": "Users",
+      "subtitle": "Read-only profile overview.",
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "grade": "Grade",
+      "onboarded": "Onboarded",
+      "joined": "Joined"
+    },
+    "common": {
+      "yes": "Yes",
+      "no": "No"
+    }
   },
   "footer": {
     "tagline": "Built for students.",

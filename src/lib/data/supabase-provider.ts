@@ -8,6 +8,7 @@ import type {
   CourseWithLessons,
   LessonForLearner,
   CertificateWithCourse,
+  AdminCourseWithLessons,
 } from './types';
 
 const SEARCH_COLS = (q: string) =>
@@ -83,7 +84,11 @@ export const supabaseProvider: DataProvider = {
     const row = data as Record<string, unknown> & { quizzes?: { questions: { correct?: string }[] }[] };
     const quiz = row.quizzes?.[0] ?? null;
     if (quiz) {
-      quiz.questions = quiz.questions.map(({ correct, ...rest }) => rest); // strip answers
+      quiz.questions = quiz.questions.map((question) => {
+        const stripped = { ...question };
+        delete stripped.correct;
+        return stripped;
+      }); // strip answers
     }
     return { ...(row as object), quiz } as LessonForLearner;
   },
@@ -233,23 +238,148 @@ export const supabaseProvider: DataProvider = {
     await s.from('roadmap_items').delete().eq('id', id);
   },
 
-  // ---- Admin: implemented in Phase 6 ----
-  async adminUpsertOpportunity() {
-    throw new Error('Phase 6');
+  // ---- Admin ----
+  async adminListOpportunities() {
+    const s = await createClient();
+    const { data, error } = await s
+      .from('opportunities')
+      .select('*')
+      .order('updated_at', { ascending: false });
+    if (error) throw error;
+    return (data ?? []) as Opportunity[];
   },
-  async adminDeleteOpportunity() {
-    throw new Error('Phase 6');
+  async adminGetOpportunity(id) {
+    const s = await createClient();
+    const { data, error } = await s.from('opportunities').select('*').eq('id', id).maybeSingle();
+    if (error) throw error;
+    return (data as Opportunity | null) ?? null;
   },
-  async adminUpsertCourse() {
-    throw new Error('Phase 6');
+  async adminUpsertOpportunity(input) {
+    const s = await createClient();
+    const {
+      data: { user },
+    } = await s.auth.getUser();
+    const payload = input.id ? input : { ...input, created_by: user?.id };
+    const query = input.id
+      ? s.from('opportunities').update(payload).eq('id', input.id).select().single()
+      : s.from('opportunities').insert(payload).select().single();
+    const { data, error } = await query;
+    if (error) throw error;
+    return data as Opportunity;
   },
-  async adminUpsertLesson() {
-    throw new Error('Phase 6');
+  async adminDeleteOpportunity(id) {
+    const s = await createClient();
+    const { error } = await s.from('opportunities').delete().eq('id', id);
+    if (error) throw error;
   },
-  async adminDeleteCourse() {
-    throw new Error('Phase 6');
+  async adminToggleOpportunity(id, isPublished) {
+    const s = await createClient();
+    const { error } = await s.from('opportunities').update({ is_published: isPublished }).eq('id', id);
+    if (error) throw error;
+  },
+  async adminListCourses() {
+    const s = await createClient();
+    const { data, error } = await s.from('courses').select('*').order('updated_at', { ascending: false });
+    if (error) throw error;
+    return (data ?? []) as Course[];
+  },
+  async adminGetCourse(id) {
+    const s = await createClient();
+    const { data, error } = await s
+      .from('courses')
+      .select('*, lessons(*, quizzes(*))')
+      .eq('id', id)
+      .maybeSingle();
+    if (error) throw error;
+    if (!data) return null;
+    const row = data as Course & { lessons?: (Record<string, unknown> & { quizzes?: unknown[]; position: number })[] };
+    const lessons = (row.lessons ?? [])
+      .map(({ quizzes, ...lesson }) => ({
+        ...lesson,
+        quiz: Array.isArray(quizzes) ? (quizzes[0] ?? null) : null,
+      }))
+      .sort((a, b) => Number(a.position) - Number(b.position));
+    return { ...(row as Course), lessons } as AdminCourseWithLessons;
+  },
+  async adminUpsertCourse(input) {
+    const s = await createClient();
+    const query = input.id
+      ? s.from('courses').update(input).eq('id', input.id).select().single()
+      : s.from('courses').insert(input).select().single();
+    const { data, error } = await query;
+    if (error) throw error;
+    return data as Course;
+  },
+  async adminToggleCourse(id, isPublished) {
+    const s = await createClient();
+    const { error } = await s.from('courses').update({ is_published: isPublished }).eq('id', id);
+    if (error) throw error;
+  },
+  async adminDeleteCourse(id) {
+    const s = await createClient();
+    const { error } = await s.from('courses').delete().eq('id', id);
+    if (error) throw error;
+  },
+  async adminUpsertLesson(input) {
+    const s = await createClient();
+    const query = input.id
+      ? s.from('lessons').update(input).eq('id', input.id).select().single()
+      : s.from('lessons').insert(input).select().single();
+    const { error } = await query;
+    if (error) throw error;
+  },
+  async adminDeleteLesson(id) {
+    const s = await createClient();
+    const { error } = await s.from('lessons').delete().eq('id', id);
+    if (error) throw error;
+  },
+  async adminReorderLessons(items) {
+    const s = await createClient();
+    for (let i = 0; i < items.length; i++) {
+      const { error } = await s.from('lessons').update({ position: -1000 - i }).eq('id', items[i].id);
+      if (error) throw error;
+    }
+    for (const item of items) {
+      const { error } = await s.from('lessons').update({ position: item.position }).eq('id', item.id);
+      if (error) throw error;
+    }
+  },
+  async adminUpsertQuiz(input) {
+    const s = await createClient();
+    const query = input.id
+      ? s.from('quizzes').update(input).eq('id', input.id).select().single()
+      : s.from('quizzes').insert(input).select().single();
+    const { error } = await query;
+    if (error) throw error;
+  },
+  async adminDeleteQuiz(id) {
+    const s = await createClient();
+    const { error } = await s.from('quizzes').delete().eq('id', id);
+    if (error) throw error;
+  },
+  async adminListUsers() {
+    const s = await createClient();
+    const { data, error } = await s.from('profiles').select('*').order('created_at', { ascending: false });
+    if (error) throw error;
+    return (data ?? []) as never;
   },
   async adminStats() {
-    throw new Error('Phase 6');
+    const s = await createClient();
+    const count = async (table: string, published?: boolean) => {
+      let q = s.from(table).select('id', { count: 'exact', head: true });
+      if (published != null) q = q.eq('is_published', published);
+      const { count: n, error } = await q;
+      if (error) throw error;
+      return n ?? 0;
+    };
+    const [users, opportunities, courses, enrollments, completions, saves] = await Promise.all([
+      count('profiles'),
+      count('opportunities', true),
+      count('courses', true),
+      count('enrollments'),
+      count('certificates'),
+      count('saved_opportunities'),
+    ]);
+    return { users, opportunities, courses, enrollments, completions, saves };
   },
 };

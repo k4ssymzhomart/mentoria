@@ -101,6 +101,8 @@ export interface Quiz {
   questions: QuizQuestion[];
 }
 
+export type LessonWithQuiz = Lesson & { quiz: Quiz | null };
+
 export interface Course {
   id: string;
   slug: string;
@@ -116,6 +118,7 @@ export interface Course {
   created_at: string;
 }
 export type CourseWithLessons = Course & { lessons: Lesson[] };
+export type AdminCourseWithLessons = Course & { lessons: LessonWithQuiz[] };
 export type LessonForLearner = Lesson & {
   quiz:
     | (Omit<Quiz, 'questions'> & { questions: Omit<QuizQuestion, 'correct'>[] })
@@ -157,6 +160,15 @@ export interface RoadmapItem {
   ref_id: string | null;
   title: Localized | null;
   status: 'todo' | 'in_progress' | 'done';
+}
+
+export interface AdminStats {
+  users: number;
+  opportunities: number;
+  courses: number;
+  enrollments: number;
+  completions: number;
+  saves: number;
 }
 
 export interface OpportunityFilters {

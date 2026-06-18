@@ -310,7 +310,150 @@
   },
   "admin": {
     "title": "Әкімші панелі",
-    "subtitle": "Контентті, мүмкіндіктерді және пайдаланушыларды басқару."
+    "subtitle": "Контентті, мүмкіндіктерді, курстарды және пайдаланушыларды басқару.",
+    "nav": {
+      "overview": "Шолу",
+      "opportunities": "Мүмкіндіктер",
+      "courses": "Курстар",
+      "users": "Пайдаланушылар",
+      "studentView": "Студент көрінісіне"
+    },
+    "stats": {
+      "users": "Пайдаланушылар",
+      "opportunities": "Жарияланған мүмкіндіктер",
+      "courses": "Жарияланған курстар",
+      "enrollments": "Курсқа жазылулар",
+      "completions": "Аяқтаулар",
+      "saves": "Сақтаулар"
+    },
+    "actions": {
+      "newOpportunity": "Жаңа мүмкіндік",
+      "newCourse": "Жаңа курс",
+      "createCourse": "Курс жасау",
+      "save": "Сақтау",
+      "edit": "Өңдеу",
+      "publish": "Жариялау",
+      "unpublish": "Жариялаудан алу",
+      "delete": "Жою",
+      "addLesson": "Сабақ қосу",
+      "moveUp": "Жоғары",
+      "moveDown": "Төмен",
+      "deleteQuiz": "Квизді жою"
+    },
+    "confirm": {
+      "deleteOpportunity": "Бұл мүмкіндікті жоясыз ба? Байланысты сақтаулар да жойылады.",
+      "deleteCourse": "Бұл курсты және барлық сабақтарды жоясыз ба?",
+      "deleteLesson": "Бұл сабақ пен квизді жоясыз ба?",
+      "deleteQuiz": "Бұл квизді жоясыз ба?",
+      "unpublish": "Жариялаудан алып тастау керек пе?"
+    },
+    "toast": {
+      "saved": "Сақталды.",
+      "error": "Бірдеңе дұрыс болмады.",
+      "validation": "Міндетті өрістерді толтырыңыз."
+    },
+    "charts": {
+      "byType": "Мүмкіндіктер түрі бойынша",
+      "byTag": "Негізгі мүмкіндік тегтері"
+    },
+    "recent": {
+      "opportunities": "Соңғы мүмкіндіктер",
+      "courses": "Соңғы курстар"
+    },
+    "status": {
+      "published": "Жарияланған",
+      "draft": "Жоба"
+    },
+    "opportunities": {
+      "title": "Мүмкіндіктер",
+      "subtitle": "Каталог элементтерін жасаңыз, аударыңыз, тегтеңіз және жариялаңыз."
+    },
+    "courses": {
+      "title": "Курстар",
+      "subtitle": "Метадеректерді басқарып, сабақтарды өңдеу үшін курсты ашыңыз.",
+      "back": "Курстар",
+      "editorSubtitle": "Метадерек, сабақтар, материалдар және квиздер.",
+      "meta": "Курс метадерегі"
+    },
+    "lessons": {
+      "title": "Сабақтар",
+      "count": "{count, plural, one {# сабақ} other {# сабақ}}"
+    },
+    "fields": {
+      "title": "Атауы",
+      "summary": "Қысқаша",
+      "description": "Сипаттама",
+      "requirements": "Талаптар",
+      "type": "Түрі",
+      "format": "Формат",
+      "gradeMin": "Сыныптан",
+      "gradeMax": "Сыныпқа дейін",
+      "deadline": "Мерзім",
+      "organizer": "Ұйымдастырушы",
+      "location": "Орын",
+      "applyUrl": "Өтінім сілтемесі",
+      "imageUrl": "Сурет сілтемесі",
+      "tags": "Тегтер",
+      "featured": "Таңдаулы",
+      "published": "Жарияланған",
+      "slug": "Slug",
+      "estimatedHours": "Сағат",
+      "subject": "Пән",
+      "difficulty": "Деңгей",
+      "coverUrl": "Мұқаба",
+      "lessons": "Сабақтар",
+      "status": "Статус",
+      "position": "Позиция",
+      "contentType": "Контент түрі",
+      "duration": "Ұзақтығы (мин)",
+      "body": "Сабақ мәтіні",
+      "videoUrl": "Видео URL",
+      "materials": "Материалдар",
+      "materialLabel": "{n}-материал атауы",
+      "materialUrl": "Материал сілтемесі",
+      "quiz": "Квиз",
+      "quizTitle": "Квиз атауы",
+      "passingScore": "Өту балы",
+      "question": "{n}-сұрақ",
+      "prompt": "Сұрақ мәтіні",
+      "option": "{n}-нұсқа",
+      "correct": "Дұрыс"
+    },
+    "tagKind": {
+      "direction": "Бағыттар",
+      "subject": "Пәндер"
+    },
+    "contentType": {
+      "text": "Мәтін",
+      "video": "Видео"
+    },
+    "table": {
+      "title": "Атауы",
+      "actions": "Әрекеттер"
+    },
+    "filters": {
+      "search": "Іздеу…"
+    },
+    "empty": {
+      "opportunities": "Әзірге мүмкіндік жоқ.",
+      "courses": "Әзірге курс жоқ.",
+      "lessons": "Әзірге сабақ жоқ.",
+      "users": "Әзірге пайдаланушы жоқ."
+    },
+    "users": {
+      "title": "Пайдаланушылар",
+      "subtitle": "Профильдерді тек қарау.",
+      "name": "Аты",
+      "email": "Email",
+      "role": "Рөл",
+      "grade": "Сынып",
+      "onboarded": "Онбординг",
+      "joined": "Қосылды"
+    },
+    "common": {
+      "yes": "Иә",
+      "no": "Жоқ"
+    }
   },
   "footer": {
     "tagline": "Студенттер үшін жасалған.",

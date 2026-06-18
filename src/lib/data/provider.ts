@@ -6,12 +6,16 @@ import type {
   LessonForLearner,
   Lesson,
   Tag,
+  Profile,
+  Quiz,
   SavedOpportunity,
   EnrollmentWithProgress,
   Certificate,
   CertificateWithCourse,
   RoadmapItem,
   ProfilePatch,
+  AdminCourseWithLessons,
+  AdminStats,
 } from './types';
 
 /**
@@ -53,12 +57,23 @@ export interface DataProvider {
   deleteRoadmapItem(id: string): Promise<void>;
 
   // ---- Admin ---- [consumed: Phase 6 — signatures only here]
+  adminListOpportunities(): Promise<Opportunity[]>;
+  adminGetOpportunity(id: string): Promise<Opportunity | null>;
   adminUpsertOpportunity(input: Partial<Opportunity>): Promise<Opportunity>;
   adminDeleteOpportunity(id: string): Promise<void>;
+  adminToggleOpportunity(id: string, isPublished: boolean): Promise<void>;
+  adminListCourses(): Promise<Course[]>;
+  adminGetCourse(id: string): Promise<AdminCourseWithLessons | null>;
   adminUpsertCourse(input: Partial<Course>): Promise<Course>;
   adminUpsertLesson(input: Partial<Lesson>): Promise<void>;
+  adminDeleteLesson(id: string): Promise<void>;
+  adminReorderLessons(items: { id: string; position: number }[]): Promise<void>;
+  adminUpsertQuiz(input: Partial<Quiz> & { lesson_id: string }): Promise<void>;
+  adminDeleteQuiz(id: string): Promise<void>;
+  adminToggleCourse(id: string, isPublished: boolean): Promise<void>;
   adminDeleteCourse(id: string): Promise<void>;
-  adminStats(): Promise<{ users: number; opportunities: number; courses: number; enrollments: number; completions: number }>;
+  adminListUsers(): Promise<Profile[]>;
+  adminStats(): Promise<AdminStats>;
 }
 
 import { supabaseProvider } from './supabase-provider';
