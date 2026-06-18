@@ -77,7 +77,11 @@
     "subtitle": "Каждый конкурс, стипендия и программа, достойные вашего времени — в одном месте.",
     "searchPlaceholder": "Поиск возможностей…",
     "filtersButton": "Фильтры",
-    "sort": { "label": "Сортировка", "deadline": "По дедлайну (ближайшие)", "newest": "Сначала новые" },
+    "sort": {
+      "label": "Сортировка",
+      "deadline": "По дедлайну (ближайшие)",
+      "newest": "Сначала новые"
+    },
     "filters": {
       "title": "Фильтры",
       "clearAll": "Сбросить всё",
@@ -95,12 +99,26 @@
       "deadline90": "Ближайшие 90 дней"
     },
     "types": {
-      "olympiad": "Олимпиада", "hackathon": "Хакатон", "scholarship": "Стипендия",
-      "internship": "Стажировка", "summer_school": "Летняя школа", "research": "Исследование",
-      "volunteering": "Волонтёрство", "competition": "Конкурс", "conference": "Конференция"
+      "olympiad": "Олимпиада",
+      "hackathon": "Хакатон",
+      "scholarship": "Стипендия",
+      "internship": "Стажировка",
+      "summer_school": "Летняя школа",
+      "research": "Исследование",
+      "volunteering": "Волонтёрство",
+      "competition": "Конкурс",
+      "conference": "Конференция"
     },
-    "formats": { "online": "Онлайн", "offline": "Очно", "hybrid": "Гибрид" },
-    "card": { "save": "Сохранить", "saved": "Сохранено", "removeFilter": "Убрать фильтр" },
+    "formats": {
+      "online": "Онлайн",
+      "offline": "Очно",
+      "hybrid": "Гибрид"
+    },
+    "card": {
+      "save": "Сохранить",
+      "saved": "Сохранено",
+      "removeFilter": "Убрать фильтр"
+    },
     "save": {
       "saved": "Сохранено",
       "removed": "Удалено",
@@ -108,15 +126,28 @@
       "signInTitle": "Войдите, чтобы сохранять",
       "signInBody": "Сохраняйте возможности и отслеживайте заявки после входа."
     },
-    "apply": { "apply": "Подать заявку", "applied": "Заявка подана", "appliedToast": "Отмечено как «подана»" },
+    "apply": {
+      "apply": "Подать заявку",
+      "applied": "Заявка подана",
+      "appliedToast": "Отмечено как «подана»"
+    },
     "empty": {
       "title": "Ничего не найдено по этим фильтрам",
       "hint": "Попробуйте убрать фильтр или расширить поиск.",
       "clear": "Сбросить фильтры"
     },
-    "error": { "title": "Не удалось загрузить возможности", "retry": "Повторить" },
-    "results": { "range": "{from}–{to} из {total}", "total": "{total} результатов" },
-    "pagination": { "prev": "Назад", "next": "Вперёд" },
+    "error": {
+      "title": "Не удалось загрузить возможности",
+      "retry": "Повторить"
+    },
+    "results": {
+      "range": "{from}–{to} из {total}",
+      "total": "{total} результатов"
+    },
+    "pagination": {
+      "prev": "Назад",
+      "next": "Вперёд"
+    },
     "detail": {
       "back": "Возможности",
       "grades": "Классы {min}–{max}",
@@ -139,7 +170,44 @@
   },
   "courses": {
     "title": "Курсы",
-    "subtitle": "Структурированная подготовка к экзаменам и поступлению."
+    "subtitle": "Учитесь в своём темпе — без онлайн-занятий.",
+    "filters": {
+      "subject": "Предмет",
+      "allSubjects": "Все предметы",
+      "difficulty": "Уровень",
+      "allLevels": "Все уровни"
+    },
+    "subjects": {
+      "sat": "SAT",
+      "ielts": "IELTS",
+      "admissions": "Поступление"
+    },
+    "difficulty": {
+      "beginner": "Начальный",
+      "intermediate": "Средний",
+      "advanced": "Продвинутый"
+    },
+    "card": {
+      "lessons": "{count, plural, one {# урок} few {# урока} many {# уроков} other {# уроков}}",
+      "hours": "{hours} ч",
+      "start": "Начать курс",
+      "continue": "Продолжить",
+      "review": "Повторить",
+      "completed": "Завершён"
+    },
+    "detail": {
+      "back": "Курсы",
+      "freeSelfPaced": "Бесплатно · в своём темпе",
+      "start": "Начать курс",
+      "continue": "Продолжить",
+      "viewCertificate": "Открыть сертификат",
+      "completed": "Курс завершён",
+      "description": "О курсе",
+      "outline": "Программа курса",
+      "progressSummary": "{completed} из {total} уроков · {pct}%",
+      "comingSoon": "Материалы скоро появятся."
+    },
+    "empty": "Нет курсов по этим фильтрам."
   },
   "roadmap": {
     "title": "Личный план",
@@ -157,5 +225,52 @@
     "tagline": "Создано для студентов.",
     "phase": "Фаза 0 — Основа",
     "dataSource": "Источник данных"
+  },
+  "lesson": {
+    "back": "К курсу",
+    "materials": "Материалы",
+    "markComplete": "Отметить и продолжить",
+    "finishCourse": "Завершить курс",
+    "previous": "Назад",
+    "next": "Далее",
+    "lessonsDrawer": "Уроки",
+    "lessonLabel": "Урок {n}",
+    "videoTitle": "Видео урока",
+    "type": {
+      "video": "Видео",
+      "text": "Текст"
+    },
+    "min": "мин",
+    "progressAria": "Прогресс курса: {pct} процентов",
+    "locked": "Закрыто",
+    "saveError": "Не удалось сохранить прогресс. Попробуйте снова.",
+    "completed": "Завершено"
+  },
+  "quiz": {
+    "heading": "Тест",
+    "check": "Проверить",
+    "tryAgain": "Ещё раз",
+    "passed": "Пройдено — {score}%",
+    "failed": "Пока нет — {score}%. Повторите и попробуйте снова.",
+    "question": "Вопрос {n}",
+    "chooseAnswer": "Выберите ответ, чтобы продолжить.",
+    "error": "Не удалось проверить тест. Попробуйте снова.",
+    "scoreDetail": "{correct} из {total} верно"
+  },
+  "certificate": {
+    "completionTitle": "Сертификат о прохождении",
+    "awardedTo": "Настоящим подтверждается, что",
+    "completedCourse": "успешно завершил(а) курс",
+    "serialLabel": "Номер",
+    "dateLabel": "Выдан",
+    "print": "Печать / Сохранить в PDF",
+    "back": "К курсу",
+    "notFound": "Сертификат не найден.",
+    "celebration": {
+      "title": "Курс завершён!",
+      "body": "Вы прошли все уроки. Ваш сертификат готов.",
+      "view": "Открыть сертификат",
+      "stay": "Продолжить просмотр"
+    }
   }
 }

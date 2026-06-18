@@ -77,7 +77,11 @@
     "subtitle": "Every competition, scholarship, and program worth your time — in one place.",
     "searchPlaceholder": "Search opportunities…",
     "filtersButton": "Filters",
-    "sort": { "label": "Sort", "deadline": "Deadline (soonest)", "newest": "Newest" },
+    "sort": {
+      "label": "Sort",
+      "deadline": "Deadline (soonest)",
+      "newest": "Newest"
+    },
     "filters": {
       "title": "Filters",
       "clearAll": "Clear all",
@@ -95,12 +99,26 @@
       "deadline90": "Next 90 days"
     },
     "types": {
-      "olympiad": "Olympiad", "hackathon": "Hackathon", "scholarship": "Scholarship",
-      "internship": "Internship", "summer_school": "Summer school", "research": "Research",
-      "volunteering": "Volunteering", "competition": "Competition", "conference": "Conference"
+      "olympiad": "Olympiad",
+      "hackathon": "Hackathon",
+      "scholarship": "Scholarship",
+      "internship": "Internship",
+      "summer_school": "Summer school",
+      "research": "Research",
+      "volunteering": "Volunteering",
+      "competition": "Competition",
+      "conference": "Conference"
     },
-    "formats": { "online": "Online", "offline": "In person", "hybrid": "Hybrid" },
-    "card": { "save": "Save", "saved": "Saved", "removeFilter": "Remove filter" },
+    "formats": {
+      "online": "Online",
+      "offline": "In person",
+      "hybrid": "Hybrid"
+    },
+    "card": {
+      "save": "Save",
+      "saved": "Saved",
+      "removeFilter": "Remove filter"
+    },
     "save": {
       "saved": "Saved",
       "removed": "Removed",
@@ -108,15 +126,28 @@
       "signInTitle": "Sign in to save",
       "signInBody": "Save opportunities and track your applications once you sign in."
     },
-    "apply": { "apply": "Apply", "applied": "Applied", "appliedToast": "Marked as applied" },
+    "apply": {
+      "apply": "Apply",
+      "applied": "Applied",
+      "appliedToast": "Marked as applied"
+    },
     "empty": {
       "title": "No opportunities match these filters",
       "hint": "Try removing a filter or broadening your search.",
       "clear": "Clear filters"
     },
-    "error": { "title": "Couldn’t load opportunities", "retry": "Try again" },
-    "results": { "range": "{from}–{to} of {total}", "total": "{total} results" },
-    "pagination": { "prev": "Previous", "next": "Next" },
+    "error": {
+      "title": "Couldn’t load opportunities",
+      "retry": "Try again"
+    },
+    "results": {
+      "range": "{from}–{to} of {total}",
+      "total": "{total} results"
+    },
+    "pagination": {
+      "prev": "Previous",
+      "next": "Next"
+    },
     "detail": {
       "back": "Opportunities",
       "grades": "Grades {min}–{max}",
@@ -139,7 +170,44 @@
   },
   "courses": {
     "title": "Courses",
-    "subtitle": "Structured preparation for exams and admissions."
+    "subtitle": "Learn at your own pace — no live sessions required.",
+    "filters": {
+      "subject": "Subject",
+      "allSubjects": "All subjects",
+      "difficulty": "Level",
+      "allLevels": "All levels"
+    },
+    "subjects": {
+      "sat": "SAT",
+      "ielts": "IELTS",
+      "admissions": "Admissions"
+    },
+    "difficulty": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "card": {
+      "lessons": "{count, plural, one {# lesson} other {# lessons}}",
+      "hours": "{hours}h",
+      "start": "Start course",
+      "continue": "Continue",
+      "review": "Review",
+      "completed": "Completed"
+    },
+    "detail": {
+      "back": "Courses",
+      "freeSelfPaced": "Free · self-paced",
+      "start": "Start course",
+      "continue": "Continue",
+      "viewCertificate": "View certificate",
+      "completed": "Course completed",
+      "description": "About this course",
+      "outline": "Course outline",
+      "progressSummary": "{completed} of {total} lessons · {pct}%",
+      "comingSoon": "Content coming soon."
+    },
+    "empty": "No courses match these filters."
   },
   "roadmap": {
     "title": "Personal plan",
@@ -157,5 +225,52 @@
     "tagline": "Built for students.",
     "phase": "Phase 0 — Foundations",
     "dataSource": "Data source"
+  },
+  "lesson": {
+    "back": "Back to course",
+    "materials": "Materials",
+    "markComplete": "Mark complete & continue",
+    "finishCourse": "Finish course",
+    "previous": "Previous",
+    "next": "Next",
+    "lessonsDrawer": "Lessons",
+    "lessonLabel": "Lesson {n}",
+    "videoTitle": "Lesson video",
+    "type": {
+      "video": "Video",
+      "text": "Reading"
+    },
+    "min": "min",
+    "progressAria": "Course progress: {pct} percent",
+    "locked": "Locked",
+    "saveError": "Could not save your progress. Try again.",
+    "completed": "Completed"
+  },
+  "quiz": {
+    "heading": "Quiz",
+    "check": "Check answers",
+    "tryAgain": "Try again",
+    "passed": "Passed — {score}%",
+    "failed": "Not yet — {score}%. Review and try again.",
+    "question": "Question {n}",
+    "chooseAnswer": "Select an answer to continue.",
+    "error": "Could not grade the quiz. Try again.",
+    "scoreDetail": "{correct} of {total} correct"
+  },
+  "certificate": {
+    "completionTitle": "Certificate of Completion",
+    "awardedTo": "This certifies that",
+    "completedCourse": "has successfully completed",
+    "serialLabel": "Serial",
+    "dateLabel": "Issued",
+    "print": "Print / Save as PDF",
+    "back": "Back to course",
+    "notFound": "Certificate not found.",
+    "celebration": {
+      "title": "Course completed!",
+      "body": "You've finished every lesson. Your certificate is ready.",
+      "view": "View certificate",
+      "stay": "Keep reviewing"
+    }
   }
 }

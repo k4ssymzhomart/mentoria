@@ -7,6 +7,7 @@ import type {
   Course,
   CourseWithLessons,
   LessonForLearner,
+  CertificateWithCourse,
 } from './types';
 
 const SEARCH_COLS = (q: string) =>
@@ -158,6 +159,15 @@ export const supabaseProvider: DataProvider = {
     const tot = total ?? 0;
     return { completed: c, total: tot, pct: tot ? Math.round((c / tot) * 100) : 0 };
   },
+  async getCompletedLessonIds(userId, courseId) {
+    const s = await createClient();
+    const { data } = await s
+      .from('lesson_progress')
+      .select('lesson_id')
+      .eq('user_id', userId)
+      .eq('course_id', courseId);
+    return (data ?? []).map((r) => (r as { lesson_id: string }).lesson_id);
+  },
   async completeLesson(userId, lessonId, courseId) {
     const s = await createClient();
     await s
@@ -184,6 +194,16 @@ export const supabaseProvider: DataProvider = {
       .eq('user_id', userId)
       .order('issued_at', { ascending: false });
     return (data ?? []) as never;
+  },
+  async getCertificateBySerial(userId, serial) {
+    const s = await createClient();
+    const { data } = await s
+      .from('certificates')
+      .select('*, course:courses(*)')
+      .eq('user_id', userId)
+      .eq('serial', serial)
+      .maybeSingle();
+    return (data as CertificateWithCourse | null) ?? null;
   },
 
   async getRoadmap(userId) {

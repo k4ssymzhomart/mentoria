@@ -143,6 +143,7 @@ export interface Certificate {
   serial: string;
   issued_at: string;
 }
+export type CertificateWithCourse = Certificate & { course: Course };
 export interface RoadmapItem {
   id: string;
   grade: number;

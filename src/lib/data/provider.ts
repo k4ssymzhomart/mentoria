@@ -9,6 +9,7 @@ import type {
   SavedOpportunity,
   EnrollmentWithProgress,
   Certificate,
+  CertificateWithCourse,
   RoadmapItem,
 } from './types';
 
@@ -37,10 +38,12 @@ export interface DataProvider {
   enroll(userId: string, courseId: string): Promise<void>;
   listEnrollments(userId: string): Promise<EnrollmentWithProgress[]>;
   getCourseProgress(userId: string, courseId: string): Promise<{ completed: number; total: number; pct: number }>;
+  getCompletedLessonIds(userId: string, courseId: string): Promise<string[]>;
   completeLesson(userId: string, lessonId: string, courseId: string): Promise<void>;
   gradeQuiz(quizId: string, answers: Record<string, string>): Promise<{ score: number; passed: boolean; total: number; correct: number }>;
   issueCertificate(courseId: string): Promise<Certificate>;
   listCertificates(userId: string): Promise<Certificate[]>;
+  getCertificateBySerial(userId: string, serial: string): Promise<CertificateWithCourse | null>;
 
   // ---- Roadmap ---- [consumed: Phase 4]
   getRoadmap(userId: string): Promise<RoadmapItem[]>;

@@ -77,7 +77,11 @@
     "subtitle": "Уақытыңызға тұрарлық әрбір байқау, стипендия және бағдарлама — бір жерде.",
     "searchPlaceholder": "Мүмкіндіктерді іздеу…",
     "filtersButton": "Сүзгілер",
-    "sort": { "label": "Сұрыптау", "deadline": "Мерзімі бойынша (жақын)", "newest": "Алдымен жаңалары" },
+    "sort": {
+      "label": "Сұрыптау",
+      "deadline": "Мерзімі бойынша (жақын)",
+      "newest": "Алдымен жаңалары"
+    },
     "filters": {
       "title": "Сүзгілер",
       "clearAll": "Бәрін тазалау",
@@ -95,12 +99,26 @@
       "deadline90": "Жақын 90 күн"
     },
     "types": {
-      "olympiad": "Олимпиада", "hackathon": "Хакатон", "scholarship": "Стипендия",
-      "internship": "Тәжірибе", "summer_school": "Жазғы мектеп", "research": "Зерттеу",
-      "volunteering": "Волонтёрлік", "competition": "Байқау", "conference": "Конференция"
+      "olympiad": "Олимпиада",
+      "hackathon": "Хакатон",
+      "scholarship": "Стипендия",
+      "internship": "Тәжірибе",
+      "summer_school": "Жазғы мектеп",
+      "research": "Зерттеу",
+      "volunteering": "Волонтёрлік",
+      "competition": "Байқау",
+      "conference": "Конференция"
     },
-    "formats": { "online": "Онлайн", "offline": "Қатыспен", "hybrid": "Аралас" },
-    "card": { "save": "Сақтау", "saved": "Сақталды", "removeFilter": "Сүзгіні алып тастау" },
+    "formats": {
+      "online": "Онлайн",
+      "offline": "Қатыспен",
+      "hybrid": "Аралас"
+    },
+    "card": {
+      "save": "Сақтау",
+      "saved": "Сақталды",
+      "removeFilter": "Сүзгіні алып тастау"
+    },
     "save": {
       "saved": "Сақталды",
       "removed": "Жойылды",
@@ -108,15 +126,28 @@
       "signInTitle": "Сақтау үшін кіріңіз",
       "signInBody": "Кіргеннен кейін мүмкіндіктерді сақтап, өтінімдеріңізді қадағалаңыз."
     },
-    "apply": { "apply": "Өтінім беру", "applied": "Өтінім берілді", "appliedToast": "«Берілді» деп белгіленді" },
+    "apply": {
+      "apply": "Өтінім беру",
+      "applied": "Өтінім берілді",
+      "appliedToast": "«Берілді» деп белгіленді"
+    },
     "empty": {
       "title": "Бұл сүзгілерге сәйкес ешнәрсе табылмады",
       "hint": "Сүзгіні алып тастаңыз немесе іздеуді кеңейтіңіз.",
       "clear": "Сүзгілерді тазалау"
     },
-    "error": { "title": "Мүмкіндіктерді жүктеу мүмкін болмады", "retry": "Қайталау" },
-    "results": { "range": "{total} ішінен {from}–{to}", "total": "{total} нәтиже" },
-    "pagination": { "prev": "Артқа", "next": "Алға" },
+    "error": {
+      "title": "Мүмкіндіктерді жүктеу мүмкін болмады",
+      "retry": "Қайталау"
+    },
+    "results": {
+      "range": "{total} ішінен {from}–{to}",
+      "total": "{total} нәтиже"
+    },
+    "pagination": {
+      "prev": "Артқа",
+      "next": "Алға"
+    },
     "detail": {
       "back": "Мүмкіндіктер",
       "grades": "{min}–{max} сынып",
@@ -139,7 +170,44 @@
   },
   "courses": {
     "title": "Курстар",
-    "subtitle": "Емтихандар мен түсуге құрылымдалған дайындық."
+    "subtitle": "Өз қарқыныңызбен оқыңыз — онлайн сабақсыз.",
+    "filters": {
+      "subject": "Пән",
+      "allSubjects": "Барлық пәндер",
+      "difficulty": "Деңгей",
+      "allLevels": "Барлық деңгейлер"
+    },
+    "subjects": {
+      "sat": "SAT",
+      "ielts": "IELTS",
+      "admissions": "Түсу"
+    },
+    "difficulty": {
+      "beginner": "Бастауыш",
+      "intermediate": "Орташа",
+      "advanced": "Жоғары"
+    },
+    "card": {
+      "lessons": "{count, plural, one {# сабақ} other {# сабақ}}",
+      "hours": "{hours} сағ",
+      "start": "Курсты бастау",
+      "continue": "Жалғастыру",
+      "review": "Қайталау",
+      "completed": "Аяқталды"
+    },
+    "detail": {
+      "back": "Курстар",
+      "freeSelfPaced": "Тегін · өз қарқыныңызбен",
+      "start": "Курсты бастау",
+      "continue": "Жалғастыру",
+      "viewCertificate": "Сертификатты ашу",
+      "completed": "Курс аяқталды",
+      "description": "Курс туралы",
+      "outline": "Курс бағдарламасы",
+      "progressSummary": "{total} сабақтың {completed} — {pct}%",
+      "comingSoon": "Материалдар жақында қосылады."
+    },
+    "empty": "Бұл сүзгілерге сай курс жоқ."
   },
   "roadmap": {
     "title": "Жеке жоспар",
@@ -157,5 +225,52 @@
     "tagline": "Студенттер үшін жасалған.",
     "phase": "0-фаза — Негіз",
     "dataSource": "Дерек көзі"
+  },
+  "lesson": {
+    "back": "Курсқа оралу",
+    "materials": "Материалдар",
+    "markComplete": "Белгілеп, жалғастыру",
+    "finishCourse": "Курсты аяқтау",
+    "previous": "Алдыңғы",
+    "next": "Келесі",
+    "lessonsDrawer": "Сабақтар",
+    "lessonLabel": "{n}-сабақ",
+    "videoTitle": "Сабақ видеосы",
+    "type": {
+      "video": "Видео",
+      "text": "Мәтін"
+    },
+    "min": "мин",
+    "progressAria": "Курс барысы: {pct} пайыз",
+    "locked": "Жабық",
+    "saveError": "Прогресс сақталмады. Қайталап көріңіз.",
+    "completed": "Аяқталды"
+  },
+  "quiz": {
+    "heading": "Тест",
+    "check": "Тексеру",
+    "tryAgain": "Қайта көру",
+    "passed": "Өттіңіз — {score}%",
+    "failed": "Әзірге жоқ — {score}%. Қайталап, қайта көріңіз.",
+    "question": "{n}-сұрақ",
+    "chooseAnswer": "Жалғастыру үшін жауап таңдаңыз.",
+    "error": "Тест тексерілмеді. Қайталап көріңіз.",
+    "scoreDetail": "{total} сұрақтың {correct} дұрыс"
+  },
+  "certificate": {
+    "completionTitle": "Курсты аяқтау сертификаты",
+    "awardedTo": "Осы куәландырады:",
+    "completedCourse": "курсын сәтті аяқтады",
+    "serialLabel": "Нөмір",
+    "dateLabel": "Берілді",
+    "print": "Басып шығару / PDF сақтау",
+    "back": "Курсқа оралу",
+    "notFound": "Сертификат табылмады.",
+    "celebration": {
+      "title": "Курс аяқталды!",
+      "body": "Барлық сабақты аяқтадыңыз. Сертификатыңыз дайын.",
+      "view": "Сертификатты ашу",
+      "stay": "Қарауды жалғастыру"
+    }
   }
 }
