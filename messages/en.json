@@ -1,0 +1,100 @@
+{
+  "common": {
+    "appName": "Mentoria Hub",
+    "tagline": "Opportunities, courses, and a personal plan — in one place.",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "continue": "Continue",
+    "or": "or",
+    "loading": "Loading…",
+    "comingSoon": "Arriving in later phases",
+    "backHome": "Back home",
+    "openMenu": "Open menu"
+  },
+  "nav": {
+    "opportunities": "Opportunities",
+    "courses": "Courses",
+    "dashboard": "Dashboard",
+    "roadmap": "Roadmap",
+    "calendar": "Calendar",
+    "admin": "Admin"
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "locale": {
+    "label": "Language",
+    "ru": "Русский",
+    "en": "English",
+    "kk": "Қазақша"
+  },
+  "auth": {
+    "signInTitle": "Sign in to Mentoria Hub",
+    "signInSubtitle": "Sign in to open your dashboard, roadmap, and calendar.",
+    "google": "Sign in with Google",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "sendMagicLink": "Send a magic link",
+    "magicLinkSent": "Check your inbox — we sent you a sign-in link.",
+    "magicLinkError": "Couldn't send the link. Please try again.",
+    "dev": "Demo sign-in (development)",
+    "devSubtitle": "No Supabase needed — pick a role to open the gated areas.",
+    "devStudent": "Sign in as student",
+    "devAdmin": "Sign in as admin",
+    "errorTitle": "Sign-in could not be completed",
+    "errorBody": "The link may have expired or already been used. Please try signing in again."
+  },
+  "landing": {
+    "badge": "Phase 0 · Foundations",
+    "title": "Your path to scholarships, exams, and university — in one place.",
+    "subtitle": "Mentoria Hub brings opportunities, structured courses, and a personal plan together. Built for students in Kazakhstan and beyond.",
+    "ctaBrowse": "Browse opportunities",
+    "ctaCourses": "Explore courses",
+    "features": {
+      "opportunities": {
+        "title": "Opportunities",
+        "description": "Scholarships, olympiads, and programs — with filters and deadlines."
+      },
+      "courses": {
+        "title": "Courses",
+        "description": "SAT EBRW, IELTS, and admissions — lessons, materials, and quizzes."
+      },
+      "roadmap": {
+        "title": "Personal plan",
+        "description": "Steps tailored to your goals — from prep to applications."
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Your progress, upcoming deadlines, and recommendations."
+  },
+  "opportunities": {
+    "title": "Opportunities",
+    "subtitle": "Scholarships, olympiads, and programs from around the world."
+  },
+  "courses": {
+    "title": "Courses",
+    "subtitle": "Structured preparation for exams and admissions."
+  },
+  "roadmap": {
+    "title": "Personal plan",
+    "subtitle": "A step-by-step route toward your goals."
+  },
+  "calendar": {
+    "title": "Calendar",
+    "subtitle": "Deadlines, sessions, and reminders in one place."
+  },
+  "admin": {
+    "title": "Admin panel",
+    "subtitle": "Manage content, opportunities, and users."
+  },
+  "footer": {
+    "tagline": "Built for students.",
+    "phase": "Phase 0 — Foundations",
+    "dataSource": "Data source"
+  }
+}
